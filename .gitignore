@@ -1,0 +1,9 @@
+#Arhivos a conexin 
+Model/connection.model.js
+
+#carpeta de modulos de node
+node_modules/
+
+#JSONs de node 
+package-lock.json
+package.json
