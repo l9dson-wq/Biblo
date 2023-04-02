@@ -9,13 +9,14 @@ const config = {
     trustedConnection: true,
 };
 
-async function connect() {
-    try {
-        let pool = await sql.connect(config);
-        console.log('Conectado a la base de datos');
-    } catch (err) {
-        console.log('Error al conectarse a la base de datos:', err);
-    }
+async function connect(){
+  try{
+    let pool = await sql.connect(config);
+    console.log('Conexion exitosa!');
+  }catch(error){
+    console.log('Erro al conectarse a la base de datos: ', error);
+  }
 }
 
 connect();
+module.exports = { connect, sql };
