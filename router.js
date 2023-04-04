@@ -27,7 +27,7 @@ router.post("/guardar-datos", SavaUserDataController.SavaUserData);
 //Inicio de sesion
 router.post("/SignIn", UserSignInController.UserSignIn);
 
-//Cerrar sesion
+//Cerrar sesion ( MOVER TODO ESTO A UN ARCHIVO SERPARADO EN CONTROLLER/SESSION/)
 router.get("/Logout", (req, res) => {
   //Se borran todas las variables de session
   req.session.destroy(error => {
