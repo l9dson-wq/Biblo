@@ -10,12 +10,14 @@ const UserSignIn = async (req, res) => {
 
     let emailConfirmationBool;
     let userFoundBool;
+    let inputValid = '';
 
     let userInformation = await validateUserData(uName, password);
 
     if (userInformation.recordset.length === 0) {
       emailConfirmationBool = false;
       userFoundBool = false;
+      inputValid = 'is-invalid'
     }
 
     if (userInformation.recordset.length !== 0) {
@@ -39,6 +41,7 @@ const UserSignIn = async (req, res) => {
     res.render("SignIn", {
       emailConfirmation: emailConfirmationBool,
       userFound: userFoundBool,
+      inputValid: inputValid,
     });
   } catch (error) {
     console.log(`Ocurrio un error en SignInUser.Controller: ${error}`);
