@@ -1,10 +1,12 @@
+require('dotenv').config();
 const sql = require('mssql');
 
+
 const config = {
-    user: 'JUANROSA',
-    password: 'admin',
-    server: 'DESKTOP-I1LE757', //change it if it's not your server
-    database: 'Testing',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    server: process.env.DB_SERVER, 
+    database: process.env.DB_NAME,
     encrypt: false,
     trustedConnection: true,
 };
