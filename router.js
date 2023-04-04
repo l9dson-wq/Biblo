@@ -9,6 +9,7 @@ const RenderSignInController = require("./Controller/ViewsRender/RenderSignIn.Co
 const UserSignInController = require('./Controller/User/SignInUser.Controller');
 const isAuthenticatedController = require('./Controller/session/AuthSession.Controller');
 const RenderHomeController = require('./Controller/ViewsRender/RenderHome');
+const LogoutController = require('./Controller/session/Logout.Controller');
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -28,16 +29,7 @@ router.post("/guardar-datos", SavaUserDataController.SavaUserData);
 router.post("/SignIn", UserSignInController.UserSignIn);
 
 //Cerrar sesion ( MOVER TODO ESTO A UN ARCHIVO SERPARADO EN CONTROLLER/SESSION/)
-router.get("/Logout", (req, res) => {
-  //Se borran todas las variables de session
-  req.session.destroy(error => {
-    if (error) {
-      console.log(error);
-    }else{
-      res.redirect('/SignIn');
-    }
-  })
-});
+router.get("/Logout", LogoutController.userLogout);
 
 // Ruta para manejar la confirmación del correo electrónico
 router.get(
