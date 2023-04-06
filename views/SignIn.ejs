@@ -18,19 +18,23 @@
     <form method="POST" action="/SignIn" class="d-block mx-auto w-25 d-flex justify-content-center flex-column align-items-center">
       <h1 class="text-center m-3">Biblo Sig in</h1>
 
-      <% if( typeof userFound !== 'undefined' && emailConfirmation !== 'undefined') { %>
-        <div>
-          <% if( userFound === false ) {%>
-            <p class="alert alert-danger" role="alert"><%= "Usuario no encontrado, por favor verifique los datos" %></p>
-          <% } %>
-        </div>
-  
-        <div>
-          <% if( userFound === true && emailConfirmation === false ) {%>
-            <p class="alert alert-danger" role="alert"><%= "El usuario aun no ha confirmado su correo electronico, no puede continuar" %></p>
-          <% } %>
-        </div>
-      <% } %>
+      <div>
+        <% if( typeof userFound !== 'undefined' && userFound === false ) {%>
+          <p class="alert alert-danger" role="alert"><%= "Usuario no encontrado, por favor verifique los datos" %></p>
+        <% } %>
+      </div>
+
+      <div>
+        <% if( typeof validPassword !== 'undefined' && validPassword === false ) {%>
+          <p class="alert alert-danger" role="alert"><%= "Contraseña o nombre de usuario incorrectos, por favor intente de nuevo" %></p>
+        <% } %>
+      </div>
+
+      <div>
+        <% if( typeof userFound !== 'undefined' && emailConfirmation !== 'undefined' && userFound === true && emailConfirmation === false ) {%>
+          <p class="alert alert-danger" role="alert"><%= "El usuario aun no ha confirmado su correo electronico, no puede continuar" %></p>
+        <% } %>
+      </div>
 
       <label for="userName">Nombre de usuario:</label>
       <input type="text" id="userName" name="userName" class="form form-control m-3 <%= (typeof inputValid !== 'undefined' ? inputValid : '' ) %>" />

@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb6ea923-dc24-4b9d-9c91-4a2b119a463f" name="Changes" comment="" />
+    <list default="true" id="fb6ea923-dc24-4b9d-9c91-4a2b119a463f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Controller/User/RegisterUser.Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/User/RegisterUser.Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/User/SignInUser.Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/User/SignInUser.Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/sendEmail.Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/sendEmail.Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/User/RegisterUser.Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model/User/RegisterUser.Model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/User/SignInUser.Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model/User/SignInUser.Model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/connection.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model/connection.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/Home.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/Index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/Register.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/SignIn.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/SignIn.ejs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +37,7 @@
     "last_opened_file_path": "C:/Users/Andelson/Desktop/Biblo",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -38,6 +50,7 @@
       <option name="presentableId" value="Default" />
       <updated>1680638644490</updated>
       <workItem from="1680638658193" duration="112000" />
+      <workItem from="1680699327424" duration="45000" />
     </task>
     <servers />
   </component>

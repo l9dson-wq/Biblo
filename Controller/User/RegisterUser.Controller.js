@@ -1,20 +1,35 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const { insertUser } = require("../../Model/User/RegisterUser.Model");
 
+var nombre;
+var apellido;
+var correo;
+var userName;
+var password;
+var result;
+var userRole;
+
 const SavaUserData = async (req, res) => {
   try {
-    let nombre = req.body.nombre;
-    let correo = req.body.correo;
-    let userName = req.body.userName;
-    let password = req.body.password;
+    nombre = req.body.nombre;
+    apellido = req.body.apellido;
+    correo = req.body.correo;
+    userName = req.body.userName;
+    password = req.body.password;
+    userRole = req.body.options;
 
-    let result = await insertUser(nombre, correo, userName, password);
+    //hashing password
+    const Rounds = 10;
+    bcrypt.hash(password, Rounds, async (err, hash) => {
+      result = await insertUser(nombre, apellido, correo, userName, hash, userRole);
 
-    res.send(`Resultado: ${result}`);
+      res.send(`Resultado: ${result}`);
+    });
   } catch (error) {
     console.log(`Ocurrio un error en SaveUserData: ${error}`);
   }
 };
 
-module.exports = { SavaUserData, };
+module.exports = { SavaUserData };

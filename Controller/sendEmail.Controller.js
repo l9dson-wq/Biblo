@@ -1,3 +1,4 @@
+require('dotenv').config();
 const nodemailer = require("nodemailer");
 
 var emailForConfirmation;
@@ -22,8 +23,8 @@ function getEmailInformation(correo, name) {
     host: "smtp.gmail.com",
     port: 587,
     auth: {
-      user: "andelsonlopez13@gmail.com",
-      pass: "sqofjwotkhmoyyxw",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 

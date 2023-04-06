@@ -10,6 +10,9 @@ const UserSignInController = require('./Controller/User/SignInUser.Controller');
 const isAuthenticatedController = require('./Controller/session/AuthSession.Controller');
 const RenderHomeController = require('./Controller/ViewsRender/RenderHome');
 const LogoutController = require('./Controller/session/Logout.Controller');
+const RenderBooksRegistrationController = require('./Controller/ViewsRender/RenderBooksRegistration');
+const UploadFileController = require('./Controller/UploadFile.Controller');
+const RenderBookIndexController = require('./Controller/ViewsRender/RenderBookIndex.Controller');
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -39,5 +42,13 @@ router.get(
 
 //Ruta protegida por session
 router.get("/Home", isAuthenticatedController.isAuthenticated,  RenderHomeController.RenderHome);
+
+// Ruta para manejar la carga de archivos
+router.post('/upload', UploadFileController.uploadFile);
+
+router.get('/BooksRegistration', isAuthenticatedController.isAuthenticated, RenderBooksRegistrationController.RenderBooksRegistration);
+
+// renderizar la vista de la lista de libros
+router.get('/BooksIndex', isAuthenticatedController.isAuthenticated, RenderBookIndexController.RenderBookIndex );
 
 module.exports = router;

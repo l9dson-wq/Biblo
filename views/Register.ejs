@@ -18,6 +18,9 @@
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" />
 
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido" />
+
       <label for="correo">Correo:</label>
       <input type="email" id="correo" name="correo" />
 
@@ -26,6 +29,15 @@
 
       <label for="password">Contraseña:</label>
       <input type="password" id="password" name="password" />
+
+      <% if( typeof userRole !== 'undefined' && userRole === 'Admin' ) { %>
+        <select id="options" name="options">
+          <option value="Admin">Administrador</option>
+          <option value="User">Usuario</option>
+        </select>
+      <% } else {%>
+        <input type="text" readonly name="options" value="User">
+      <% } %>
 
       <button type="submit">Guardar</button>
       <a href="/SignIn" class="m-3">Iniciar Sesion</a>

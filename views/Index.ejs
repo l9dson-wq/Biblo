@@ -20,8 +20,10 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
+          <th scope="col">LastName</th>
           <th scope="col">Email</th>
           <th scope="col">UserName</th>
+          <th scope="col">Role</th>
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -30,8 +32,10 @@
         <tr>
           <th scope="row"><%= user.usuarioID %></th>
           <td><%= user.Name %></td>
+          <td><%= user.LastName %></td>
           <td><%= user.Email %></td>
           <td><%= user.UserName %></td>
+          <td><%= user.UserRole %></td>
           <td
             class="text-light bg-<%= user.EmailConfirmed === 'true' ? 'success' : 'danger' %>"
           >

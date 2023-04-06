@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Biblo home</title>
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
     <h1>Biblo Home</h1>
     <% if ( session.userId !== undefined ) {%>
-        <p><%= session.userId %></p>
-        <p><%= session.Name %></p>
-        <p><%= session.Email %></p>
+    <p>Id: <%= session.userId %></p>
+    <p>Nombre: <%= session.Name %></p>
+    <p>Correo: <%= session.Email %></p>
+    <p>Tipo de usuario: <%= session.Role %></p>
     <% } %>
 
-    <a href="/Logout">Cerra sesion</a>
-    <a href="/">Ir a administracion de usuarios</a>
-</body>
+    <a class="btn btn-danger m-3" href="/Logout">Cerra sesion</a>
+    <a class="btn btn-warning m-3" href="/">Ir a administracion de usuarios</a>
+    <a class="btn btn-success m-3" href="/BooksRegistration"
+      >Ir a registro de libros</a
+    >
+    <a class="btn btn-success m-3" href="/BooksIndex">Lista de libros</a>
+  </body>
 </html>

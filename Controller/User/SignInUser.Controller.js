@@ -10,31 +10,48 @@ const UserSignIn = async (req, res) => {
 
     let emailConfirmationBool;
     let userFoundBool;
-    let inputValid = '';
+    let userValidPassword;
+    let inputValid = "";
 
     let userInformation = await validateUserData(uName, password);
+    console.log(userInformation.result);
 
-    if (userInformation.recordset.length === 0) {
+    if (userInformation.userFound === false) {
       emailConfirmationBool = false;
-      userFoundBool = false;
-      inputValid = 'is-invalid'
-    }
+      userFound = false;
+      inputValid = "is-invalid";
 
-    if (userInformation.recordset.length !== 0) {
-      if (userInformation.recordset[0].EmailConfirmed === "false") {
-        emailConfirmationBool = false;
-        userFoundBool = true;
-      } else {
-        emailConfirmationBool = true;
-        userFoundBool = true;
+      return res.render("SignIn", {
+        emailConfirmation: emailConfirmationBool,
+        userFound: userFoundBool,
+        inputValid: inputValid,
+        validPassword: userValidPassword,
+      });
+    } else {
+      if (!userInformation.isValidPassword) {
+        userValidPassword = false;
+        userFound = true;
+        inputValid = "is-invalid";
+        emailConfirmationBool =
+          userInformation.result["EmailConfirmed"] === "true" ? true : false;
 
+        return res.render("SignIn", {
+          emailConfirmation: emailConfirmationBool,
+          userFound: userFoundBool,
+          inputValid: inputValid,
+          validPassword: userValidPassword,
+        });
+      }
+
+      if (userInformation.userFound && userInformation.isValidPassword) {
         //agregando la sesion ( se podria serparar en una funcion a parte)
-        let userGot = userInformation.recordset[0];
+        let userGot = userInformation.result;
         req.session.userId = userGot.userID;
         req.session.Name = userGot.Name;
         req.session.Email = userGot.Email;
+        req.session.Role = userGot.UserRole;
 
-        return res.redirect('Home');
+        return res.redirect("Home");
       }
     }
 
@@ -42,6 +59,7 @@ const UserSignIn = async (req, res) => {
       emailConfirmation: emailConfirmationBool,
       userFound: userFoundBool,
       inputValid: inputValid,
+      validPassword: userValidPassword,
     });
   } catch (error) {
     console.log(`Ocurrio un error en SignInUser.Controller: ${error}`);

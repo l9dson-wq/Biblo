@@ -1,9 +1,11 @@
 const { sql } = require("../connection.model");
-const { getEmailInformation } = require("../../Controller/sendEmail.Controller");
+const {
+  getEmailInformation,
+} = require("../../Controller/sendEmail.Controller");
 const { sendToken } = require("../../Controller/generateToken.Controller");
 const { setTokenReceived } = require("../../Controller/sendEmail.Controller");
 
-async function insertUser(nombre, correo, usuario, password) {
+async function insertUser(nombre, apellido, correo, usuario, password, userRole) {
   try {
     let tokenForUser = sendToken();
 
@@ -11,14 +13,12 @@ async function insertUser(nombre, correo, usuario, password) {
       `SELECT * FROM Users WHERE UserName = '${usuario}' `
     );
 
-    // console.log(userNameGot.recordset.length);
-
     if (userNameGot.recordset.length !== 0) {
       return `El nombre de usuario ${usuario} ya ha sido registro, intente con uno diferente`;
     }
 
     await sql.query(
-      `INSERT INTO Users (Name, Email, UserName, Password, EmailConfirmed, UserToken) Values ('${nombre}','${correo}','${usuario}', '${password}', 'false', '${tokenForUser}')`
+      `INSERT INTO Users (Name, LastName, Email, UserName, Password, UserRole, EmailConfirmed, UserToken) Values ('${nombre}', '${apellido}','${correo}','${usuario}', '${password}', '${userRole}', 'false', '${tokenForUser}')`
     );
 
     setTokenReceived(tokenForUser);
