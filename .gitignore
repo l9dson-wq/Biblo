@@ -10,4 +10,4 @@ package-lock.json
 package.json
 
 #Variables Locales
-LocalVariables.env
+.env
