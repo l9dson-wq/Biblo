@@ -17,7 +17,7 @@
     ></script>
     <link rel="stylesheet" href="/css/BooksIndex.css" />
   </head>
-  <body class="">
+  <body class="bg-white">
     <!-- NAVBAR -->
     <nav class="navbar navbar-black bg-black shadow-lg fixed-top">
       <div class="container-fluid">
@@ -188,10 +188,10 @@
             class="aside d-flex flex-column align-items-start justify-content-end mt-5 p-3 shadow-lg bg-white rounded"
           >
             <!-- Aquí va el contenido del aside -->
-            <h3>Filters:</h3>
+            <h3>Filtros:</h3>
             <!-- Default checkbox -->
             <form action="/BooksIndex" method="POST">
-              <h5>Stock</h5>
+              <h5>Cantidad disponible</h5>
               <div class="btn-group d-flex flex-column" data-toggle="buttons">
                 <label class="">
                   <input
@@ -241,18 +241,18 @@
                     autocomplete="off"
                     value="5"
                   />
-                  50 or more
+                  50 o Mas
                 </label>
               </div>
               <div class="d-flex flex-row align-items-center">
                 <button type="submit" class="btn btn-primary btn-rounde mt-5">
-                  Filter
+                  Filtrar
                 </button>
                 <a
                   href="/BooksIndex"
                   class="btn btn-secondary btn-rounded mt-5"
                   style="margin-left: 5px"
-                  >Clear</a
+                  >Limpiar</a
                 >
               </div>
             </form>

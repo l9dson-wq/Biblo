@@ -301,7 +301,7 @@
         <div class="d-flex justify-content-end align-items-end">
           <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "black" %>  me-4">$<%= book.Price %></p>
           <p class="w-100 <%= book.Stock <= 5 && book.Stock > 1 ? "text-success" : "text-decoration-line-through" %> ">
-            <%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS! " : "¡ENVÍO GRATIS! " %><i class="fa fa-solid fa-truck"></i>
+            <i class="fa fa-solid fa-truck"></i><%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS! " : "¡ENVÍO GRATIS! " %>
           </p>
         </div>
         <% if (book.Stock !== 0 && session.Role !== "Admin") { %>
@@ -335,7 +335,7 @@
                   <p><strong>Disponibilidad:</strong> 10 </p> -->
         </div>
         <h6 class="p-2 text-center text-white fw-bold" style="background-color: #004D43;">
-          Recibe increibles ofertas! <i class="fa fa-solid fa-gift"></i>
+          <i class="fa fa-solid fa-gift"></i> Recibe increibles ofertas! 
         </h6>
         <div class="d-flex justify-content-around align-items-center mt-5 mb-5">
           <form action="/SaveFavorites" method="post">
