@@ -121,9 +121,9 @@
                   <div class="container">
                     <div class="row">
                       <% booksList.forEach((book) => {%>
-                      <div class="col-md-5 mt-2" id="elPapa">
-                        <div
-                          class="mx-auto w-100 rounded shadow p-3 mb-5 bg-white rounded"
+                      <div class="col-md-5 border border-1 border-disable" id="elPapa">
+                        <div 
+                          class="mx-auto w-100 bg-white"
                           id="grandFather"
                         >
                           <!-- image -->
@@ -134,7 +134,7 @@
                             >
                               <img
                                 id="imageBook"
-                                class="shadow-lg rounded"
+                                class="shadow-lg"
                                 src="<%= book.ImagePath %>"
                                 alt=""
                               />
@@ -145,13 +145,12 @@
                           <!-- cap type -->
                           <div id="capType">
                             <p><%= book.PublishedYear > 2000 ? "Tapa Dura" : "Tapa Blanda" %></p>
-                            <hr id="lineaDivision" />
                           </div>
                           <!-- cap type -->
 
                           <!-- INFORMATION -->
                           <div id="informationSide" class="w-100 d-flex flex-column justify-content-start align-items-start">
-                            <p class="fw-bold"><%= book.Title %></p>
+                            <p class="fw-bold" id="bookTitleStyle"><%= book.Title %></p>
                             <p class="text-secondary"><%= book.Autor %></p>
                             <p></p>
                             <p

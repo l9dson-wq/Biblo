@@ -11,10 +11,11 @@
 
 #lineaDivision {
   max-width: 100%;
+  color: red;
 }
 
 #imageBook {
-  width: 90%;
+  width: 100%;
   margin-bottom: 20%;
 }
 
@@ -39,4 +40,9 @@
   #sidebarMenu {
     display: block;
   }
+}
+
+#bookTitleStyle{
+  border-top: 1px solid rgb(213, 213, 213);
+  width: 100%;
 }
