@@ -20,6 +20,7 @@ const RenderBookIndex = async (req, res) => {
     session: req.session,
     booksList: books,
     message: "",
+    nameSearched: undefined,
   });
 };
 
@@ -49,6 +50,7 @@ const RenderBooksFilters = async (req, res) => {
     session: req.session,
     booksList: booksNew,
     message: books.errorMessage,
+    nameSearched: searchName,
   });
 };
 

@@ -32,6 +32,8 @@ const uploadFile = async (req, res) => {
   let price = req.body.price;
   let stock = req.body.stock;
 
+  price = parseFloat(price);
+
   let result = await uploadBookModel.uploadBook(
     rutaArchivo,
     title,

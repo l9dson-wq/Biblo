@@ -4,7 +4,6 @@ const session = require("express-session");
 const GetBookInformationModel = require("../../Model/Books/GetBookInformation");
 const FavoriteExistedModel = require("../../Model/Favorites/FavoritesBooks.Modal");
 const commentsModel = require("../../Model/comments/comments.Model");
-// const likesCommentsModel = require("../../Model/comments/likesComments.Model");
 
 const RenderBooksInformation = async (req, res) => {
   let bookID = req.query.bookID;

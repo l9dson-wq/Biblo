@@ -64,10 +64,11 @@
             name="searchName"
             type="text"
             class="form-control rounded me-2 border-0"
-            placeholder="Search"
+            placeholder="Buscar"
             aria-label="Search"
             aria-describedby="search-addon"
             width="200"
+            value="<%= nameSearched !== "" ? nameSearched : "" %>"
           />
           <button type="submit" class="border-0 rounded-circle p-1 bg-white">
             <span class="p-2" id="search-addon">
@@ -156,7 +157,7 @@
                             <p
                               class="fw-bold text-<%= book.Stock == 0 ? 'danger' : `danger fs-4` %>"
                             >
-                              <%= book.Stock == 0 ? "Temporalmente no disponible" : "$" + book.Price %>
+                              <%= book.Stock == 0 ? "Temporalmente no disponible" : "$" + book.Price.toFixed(2) %>
                             </p>
                             <p class="text-success fw-medium" id="envioGratis">
                               <% if ( book.Stock <= 5 && book.Stock > 1 ) {%>
