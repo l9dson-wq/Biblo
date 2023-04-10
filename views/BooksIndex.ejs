@@ -19,7 +19,7 @@
   </head>
   <body class="">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-black bg-black shadow-lg">
+    <nav class="navbar navbar-black bg-black shadow-lg fixed-top">
       <div class="container-fluid">
         <div class="d-flex flex-row align-items-center">
           <a class="navbar-brand text-white" href="/Home"
@@ -94,7 +94,7 @@
     </nav>
     <!-- NAVBAR -->
 
-    <div class="row" style="width: 190vh;">
+    <div class="row" style="width: 190vh; margin-top: 5%;">
       <div class="col-md-9">
         <!-- DIV PADRE -->
         <div class="">
@@ -134,7 +134,7 @@
                             >
                               <img
                                 id="imageBook"
-                                class="shadow-lg"
+                                class="shadow-lg img-fluid aspect-ratio-4x3"
                                 src="<%= book.ImagePath %>"
                                 alt=""
                               />
@@ -143,7 +143,7 @@
                           <!-- image -->
 
                           <!-- cap type -->
-                          <div id="capType">
+                          <div id="capType" class="w-100">
                             <p><%= book.PublishedYear > 2000 ? "Tapa Dura" : "Tapa Blanda" %></p>
                           </div>
                           <!-- cap type -->
@@ -158,8 +158,10 @@
                             >
                               <%= book.Stock == 0 ? "Temporalmente no disponible" : "$" + book.Price %>
                             </p>
-                            <p class="text-success fw-bold">
-                              <%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS!" : "" %>
+                            <p class="text-success fw-medium" id="envioGratis">
+                              <% if ( book.Stock <= 5 && book.Stock > 1 ) {%>
+                                ¡ENVÍO GRATIS! <i class="fa fa-solid fa-truck"></i>
+                              <% } else { "" } %>  
                             </p>
                           </div>
                           <!-- INFORMATION -->

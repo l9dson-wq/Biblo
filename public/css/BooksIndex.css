@@ -3,7 +3,7 @@
   height: 100%;
   /* border: 1px solid #3c3c3c; */
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
   padding: 20px;
@@ -15,7 +15,8 @@
 }
 
 #imageBook {
-  width: 100%;
+  width: 200px;
+  height: 280px;
   margin-bottom: 20%;
 }
 
@@ -44,5 +45,17 @@
 
 #bookTitleStyle{
   border-top: 1px solid rgb(213, 213, 213);
+  width: 100%;
+}
+
+/* @media (max-width: 1200px) {
+  #imageBook {
+    display: none;
+    margin-bottom: 20%;
+  }
+} */
+
+#envioGratis{
+  height: 10px;
   width: 100%;
 }

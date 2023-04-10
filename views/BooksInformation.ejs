@@ -21,7 +21,7 @@
   </head>
   <body id="contenedorSupremo">
         <!-- NAVBAR -->
-        <nav class="navbar navbar-black bg-black">
+        <nav class="navbar navbar-black bg-black fixed-top mb-5">
           <div class="container-fluid">
             <div class="d-flex flex-row align-items-center">
               <a class="navbar-brand text-white" href="/Home"
@@ -80,7 +80,7 @@
 
     <!-- CONTENT -->
     <% result.forEach((book) => { %>
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row mt-5">
       <div>
         <div
           id="grandFather"
@@ -105,14 +105,14 @@
             </p>
 
             <div
-              class="ms-4 mt-5 d-flex flex-row justify-content-center align-items-center"
+              class="ms-4 mt-5 mb-5 d-flex flex-row justify-content-center align-items-center"
             >
               <div class="bg-dark text-white p-2 rounded ms-2">Action</div>
               <div class="bg-dark text-white p-2 rounded ms-2">Romance</div>
               <div class="bg-dark text-white p-2 rounded ms-2">Thriller</div>
             </div>
 
-            <strong>Resumen</strong>
+            <strong>Resumen de <%= book.Title  %> </strong>
             <p><%= book.Description %></p>
           </div>
         </div>
@@ -187,7 +187,7 @@
               <% comments.slice(0, 2).forEach((item) => { %>
                 <!-- Código de un comentario -->
                 <div class="d-flex flex-start mb-4">
-                  <img class="rounded-circle shadow-1-strong me-3 shadow border border-1 border-disable"
+                  <img class="rounded-circle me-3 border border-1 border-disable"
                     src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
                     height="65" />
                   <div class="card w-100 border-disable">
@@ -229,7 +229,7 @@
               <% comments.slice(2).forEach((item) => { %>
                 <!-- Código de un comentario -->
                 <div class="d-flex flex-start mb-4">
-                  <img class="rounded-circle shadow-1-strong me-3"
+                  <img class="rounded-circle me-3 border border-1 border-disable"
                     src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
                     height="65" />
                   <div class="card w-100">
@@ -270,12 +270,12 @@
         </div>
       </div>
       <div
-        class="p-5 me-5 mx-aut w-50 d-flex flex-column mt-5 shadow p-3 mb-5 bg-white rounded m-0 align-self-start"
+        class="p-4 me-5 mx-aut w-50 d-flex flex-column mt-5 shadow mb-5 bg-white rounded m-0 align-self-start"
       >
         <div class="d-flex justify-content-end align-items-end">
-          <p class="h2 text-danger me-4">$<%= book.Price %></p>
-          <p class="fw-bold <%= book.Stock <= 5 && book.Stock > 1 ? "text-success" : "text-decoration-line-through" %> ">
-            <%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS!" : "¡ENVÍO GRATIS!" %>
+          <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "danger" %>  me-4">$<%= book.Price %></p>
+          <p class="w-100 <%= book.Stock <= 5 && book.Stock > 1 ? "text-success" : "text-decoration-line-through" %> ">
+            <%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS! " : "¡ENVÍO GRATIS! " %><i class="fa fa-solid fa-truck"></i>
           </p>
         </div>
         <% if (book.Stock !== 0) { %>
@@ -303,7 +303,7 @@
                   <p><strong>Disponibilidad:</strong> 10 </p> -->
         </div>
         <h6 class="p-2 text-center text-white fw-bold shadow bg-success">
-          Recibe increibles ofertas!
+          Recibe increibles ofertas! <i class="fa fa-solid fa-gift"></i>
         </h6>
         <div class="d-flex justify-content-around align-items-center mt-5">
           <form action="/SaveFavorites" method="post">
