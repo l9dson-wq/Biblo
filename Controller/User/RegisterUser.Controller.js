@@ -25,7 +25,7 @@ const SavaUserData = async (req, res) => {
     bcrypt.hash(password, Rounds, async (err, hash) => {
       result = await insertUser(nombre, apellido, correo, userName, hash, userRole);
 
-      res.send(`Resultado: ${result}`);
+      res.redirect(`SignIn`);
     });
   } catch (error) {
     console.log(`Ocurrio un error en SaveUserData: ${error}`);

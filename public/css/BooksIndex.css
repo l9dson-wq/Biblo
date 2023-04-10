@@ -1,0 +1,42 @@
+#grandFather {
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid #3c3c3c; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+#lineaDivision {
+  max-width: 100%;
+}
+
+#imageBook {
+  width: 100%;
+  margin-bottom: 20%;
+}
+
+#capType {
+  width: 97%;
+  /* border: 1px solid black; */
+}
+
+#informationSide {
+  max-width: 100%;
+}
+
+#elPapa {
+  width: 19%;
+}
+
+#sidebarMenu {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  #sidebarMenu {
+    display: block;
+  }
+}

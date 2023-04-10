@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorites</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/favoritesStyles.css" />
+  </head>
+  <body class="">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-black bg-black">
+      <div class="container-fluid">
+        <div class="d-flex flex-row align-items-center">
+          <a class="navbar-brand text-white" href="/Home"
+            ><h1 class="display-6">Biblos</h1></a
+          >
+          <ul class="navbar-nav d-flex flex-row align-items-center">
+            <li class="nav-item m-2">
+              <a
+                class="nav-link active text-white"
+                aria-current="page"
+                href="/Home"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/BooksIndex">Books</a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/Favorites"
+                >Favorites</a
+              >
+            </li>
+            <% if( session.Role === "Admin") { %>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/">admin. users</a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/BooksRegistration"
+                >Regis. Book</a
+              >
+            </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="w-25 d-flex justify-content-end align-items-center">
+          <div class="d-flex justify-content-end align-items-center">
+            <p class="text-white m-3">
+              <%= session.Name + " " + session.LastName %>
+            </p>
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+              class="rounded-circle"
+              height="45"
+              alt="Portrait of a Woman"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- NAVBAR -->
+
+    <h1 class="text-center mt-5 mb-5">List of favorites</h1>
+
+    <div
+      class="row row-cols-1 row-cols-md-4 g-2 justify-content-center align-items-center mx-auto w-50 shadow-lg p-3 mb-5 rounded"
+    >
+      <% imageLocations.forEach((images) => { %>
+      <div class="col mb-3">
+        <a href="/BooksInformation?bookID=<%= images.bookId %>">
+          <img
+          src="<%= images.imageLocation %>"
+          alt="<%= images.bookName %>"
+          class="rounded shadow w-100"
+          style="max-width: 200px"
+        />
+        </a>
+      </div>
+
+      <% }) %>
+    </div>
+  </body>
+</html>

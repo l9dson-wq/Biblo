@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
             return res.redirect('/Home');
         }
 
-        res.render('Index', { resultList: users });
+        res.render('Index', { resultList: users, session: req.session });
     }catch(error){
         console.log(error);
     }

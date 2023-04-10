@@ -13,68 +13,206 @@
     />
   </head>
   <body>
-    <!-- <form action="/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="image" />
-      <button type="submit">Subir imagen</button>
-    </form> -->
+    <body id="contenedorSupremo">
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-black bg-black">
+        <div class="container-fluid">
+          <div class="d-flex flex-row align-items-center">
+            <a class="navbar-brand text-white" href="/Home"
+              ><h1 class="display-6">Biblos</h1></a
+            >
+            <ul class="navbar-nav d-flex flex-row align-items-center">
+              <li class="nav-item m-2">
+                <a
+                  class="nav-link active text-white"
+                  aria-current="page"
+                  href="/Home"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/BooksIndex"
+                  >Books</a
+                >
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/Favorites"
+                  >Favorites</a
+                >
+              </li>
+              <% if( session.Role === "Admin") { %>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/"
+                  >admin. users</a
+                >
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/BooksRegistration"
+                  >Regis. Book</a
+                >
+              </li>
+              <% } %>
+            </ul>
+          </div>
+          <div class="w-25 d-flex justify-content-end align-items-center">
+            <div class="d-flex justify-content-end align-items-center">
+              <p class="text-white m-3">
+                <%= session.Name + " " + session.LastName %>
+              </p>
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+                class="rounded-circle"
+                height="45"
+                alt="Portrait of a Woman"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- NAVBAR -->
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-      <label for="title">Titulo:</label>
-      <input type="text" id="title" name="title" required />
-
-      <label for="autor">autor:</label>
-      <input type="text" id="autor" name="autor" required />
-
-      <label for="description">Descripcion:</label>
-      <input type="text" id="description" name="description" required />
-
-      <label for="year">Año de publicacion:</label>
-      <input
-        type="number"
-        id="year"
-        name="year"
-        min="1700"
-        max="<%= new Date().getFullYear() %>"
-        required
-      />
-
-      <label for="price">Precio:</label>
-      <input
-        type="number"
-        id="price"
-        name="price"
-        min="0"
-        max="10000"
-        placeholder="$Precio"
-        required
-      />
-
-      <label for="stock">Cantidad:</label>
-      <input
-        type="number"
-        id="stock"
-        name="stock"
-        min="0"
-        max="1000"
-        required
-      />
-
-      <input
-        type="file"
-        id="fileInput"
-        name="image"
-        onchange="showPreview(event)"
-      />
+    <!-- FORM -->
+    <div
+      class="container d-flex flex-row mt-5 shadow-lg p-3 mb-5 bg-white rounded p-5 justify-content-around rounded"
+    >
       <img
+        src="/background/coverBooks.jpg"
         id="preview"
-        src=""
-        alt="Vista previa de imagen"
-        style="display: none"
-        width="200"
+        alt=""
+        width="400"
+        height="600"
       />
 
-      <button type="submit">Guardar</button>
-    </form>
+      <form
+        action="/upload"
+        method="POST"
+        enctype="multipart/form-data"
+        class="text-center"
+        style="width: 400px"
+      >
+        <h3 class="text-center">
+          Registrando nuevo libro
+        </h3>
+
+        <label for="title" class="form form-label"
+          ><strong>Titulo</strong></label
+        >
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          class="form form-control text-center"
+          value=""
+        />
+
+        <label for="autor" class="form form-label"
+          ><strong>Autor</strong></label
+        >
+        <input
+          type="text"
+          id="autor"
+          name="autor"
+          required
+          class="form form-control text-center"
+          value=""
+        />
+
+        <div class="form-group">
+          <label for="description" class="form form-label"
+            ><strong>Descripcion</strong></label
+          >
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <label for="year" class="form form-label"
+          ><strong>Año de publicacion</strong></label
+        >
+        <input
+          type="number"
+          id="year"
+          name="year"
+          min="1700"
+          max="<%= new Date().getFullYear() %>"
+          required
+          class="form form-control text-center"
+          value=""
+        />
+
+        <!-- <label for="price" class="form form-label"><strong>Precio</strong></label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            min="0"
+            max="10000"
+            placeholder="$Precio"
+            required
+            class="form form-control text-center"
+            value=""
+          /> -->
+        <label for="price" class="form form-label"
+          ><strong>Precio</strong></label
+        >
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input
+            type="number"
+            class="form-control text-center"
+            name="price"
+            id="price"
+            min="1"
+            max="10000"
+            aria-label="Amount (to the nearest dollar)"
+            placeholder="0.00"
+            value=""
+          />
+        </div>
+
+        <label for="stock" class="form form-label"
+          ><strong>Cantidad disponible</strong></label
+        >
+        <input
+          type="number"
+          id="stock"
+          name="stock"
+          min="0"
+          max="1000"
+          required
+          class="form form-control text-center"
+          value=""
+        />
+
+        <div
+          class="d-flex flex-column justify-content-center align-items-center mt-5"
+        >
+          <input
+            type="file"
+            id="fileInput"
+            name="image"
+            onchange="showPreview(event)"
+            class="form-control-file"
+            value=""
+          />
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-success btn-rounded mt-5">
+            Success
+          </button>
+          <a class="btn btn-warning mt-5" href="/BooksIndex">Cancelar</a>
+        </div>
+      </form>
+    </div>
+    <!-- FORM -->
 
     <script>
       function showPreview(event) {

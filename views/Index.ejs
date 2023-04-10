@@ -13,7 +13,61 @@
     />
   </head>
   <body>
-    <h1>Biblo | Usuarios registrados</h1>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-black bg-black">
+      <div class="container-fluid">
+        <div class="d-flex flex-row align-items-center">
+          <a class="navbar-brand text-white" href="/Home"
+            ><h1 class="display-6">Biblos</h1></a
+          >
+          <ul class="navbar-nav d-flex flex-row align-items-center">
+            <li class="nav-item m-2">
+              <a
+                class="nav-link active text-white"
+                aria-current="page"
+                href="/Home"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/BooksIndex">Books</a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/Favorites"
+                >Favorites</a
+              >
+            </li>
+            <% if( session.Role === "Admin") { %>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/">admin. users</a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/BooksRegistration"
+                >Regis. Book</a
+              >
+            </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="w-25 d-flex justify-content-end align-items-center">
+          <div class="d-flex justify-content-end align-items-center">
+            <p class="text-white m-3">
+              <%= session.Name + " " + session.LastName %>
+            </p>
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+              class="rounded-circle"
+              height="45"
+              alt="Portrait of a Woman"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- NAVBAR -->
+
+    <h1 class="mt-5">Biblo | Usuarios registrados</h1>
 
     <table class="table">
       <thead>

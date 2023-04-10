@@ -11,42 +11,47 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
+
+    <div class="fullcontent">
+      <div class="headings">
+        <h1>Biblo Log In</h1>
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem minima libero, quisquam voluptates reprehenderit quia! Sit vel vero officiis doloribus?Lorem</h2>
+      </div>
+      <div class="formbox">
+        <h3>Log In</h3>
+        <form method="POST" action="/SignIn">
+
+          <div>
+            <% if( typeof userFound !== 'undefined' && userFound === false ) {%>
+              <p class="alert alert-danger" role="alert">Usuario no encontrado, por favor verifique los datos</p>
+            <% } %>
+          </div>
     
-    <!-- CODIGO PARA PERSONALIZAR -->
-    <form method="POST" action="/SignIn" class="d-block mx-auto w-25 d-flex justify-content-center flex-column align-items-center">
-      <h1 class="text-center m-3">Biblo Sig in</h1>
+          <div>
+            <% if( typeof validPassword !== 'undefined' && validPassword === false ) {%>
+              <p class="alert alert-danger" role="alert">Contraseña o nombre de usuario incorrectos, por favor intente de nuevo</p>
+            <% } %>
+          </div>
+    
+          <div>
+            <% if( typeof userFound !== 'undefined' && typeof emailConfirmation !== 'undefined' && typeof validPassword !== 'undefined'  && userFound === true && emailConfirmation === false && validPassword === true ) {%>
+              <p class="alert alert-danger" role="alert">El usuario aun no ha confirmado su correo electronico, no puede continuar</p>
+            <% } %>
+          </div>
 
-      <div>
-        <% if( typeof userFound !== 'undefined' && userFound === false ) {%>
-          <p class="alert alert-danger" role="alert"><%= "Usuario no encontrado, por favor verifique los datos" %></p>
-        <% } %>
+          <label for="userName">Username</label>
+          <input type="text" name="userName" class="asd <%= (typeof inputValid !== 'undefined' ? inputValid : '' ) %>" id="userName"/>
+          <label for="">Password</label>
+          <input type="password" id="password" name="password" class="asd <%= (typeof inputValid !== 'undefined' ? inputValid : '' ) %>" />
+          <input id="btn" type="submit" name="submit" value="Log In" class="mainbox">
+          <label for="">New customer?</label>
+          <a id="register-link" href="/Register">Register Now</a>
+        </form>
       </div>
-
-      <div>
-        <% if( typeof validPassword !== 'undefined' && validPassword === false ) {%>
-          <p class="alert alert-danger" role="alert"><%= "Contraseña o nombre de usuario incorrectos, por favor intente de nuevo" %></p>
-        <% } %>
-      </div>
-
-      <div>
-        <% if( typeof userFound !== 'undefined' && emailConfirmation !== 'undefined' && userFound === true && emailConfirmation === false ) {%>
-          <p class="alert alert-danger" role="alert"><%= "El usuario aun no ha confirmado su correo electronico, no puede continuar" %></p>
-        <% } %>
-      </div>
-
-      <label for="userName">Nombre de usuario:</label>
-      <input type="text" id="userName" name="userName" class="form form-control m-3 <%= (typeof inputValid !== 'undefined' ? inputValid : '' ) %>" />
-
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" class="form form-control m-3 <%= (typeof inputValid !== 'undefined' ? inputValid : '' ) %>" />
-
-      <button type="submit" class="btn btn-primary m-3">Iniciar sesion</button>
-      <a href="/Register" class="m-3">Crear Nueva Cuenta</a>
-    </form>
-  
-    <!-- CODIGO PARA PERSONALIZAR -->
+    </div>
 
     <script>
       window.history.replaceState({ page: 'home' }, 'Home', '/');

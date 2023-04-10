@@ -11,41 +11,263 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
+    <script
+      src="https://kit.fontawesome.com/b55d7e5cd9.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/BooksIndex.css" />
   </head>
-  <body>
-    <h1>Biblo Books</h1>
+  <body class="">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-black bg-black shadow-lg">
+      <div class="container-fluid">
+        <div class="d-flex flex-row align-items-center">
+          <a class="navbar-brand text-white" href="/Home"
+            ><h1 class="display-6">Biblos</h1></a
+          >
+          <ul class="navbar-nav d-flex flex-row align-items-center">
+            <li class="nav-item m-2">
+              <a
+                class="nav-link active text-white"
+                aria-current="page"
+                href="/Home"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/BooksIndex">Books</a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/Favorites"
+                >Favorites</a
+              >
+            </li>
+            <% if( session.Role === "Admin") { %>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/">admin. users</a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/BooksRegistration"
+                >Regis. Book</a
+              >
+            </li>
+            <% } %>
+          </ul>
+        </div>
+        <!-- Buscar por titulo de libro -->
+        <form
+          class="d-flex input-group w-25"
+          method="post"
+          action="/BooksIndex"
+        >
+          <input
+            name="searchName"
+            type="text"
+            class="form-control rounded me-2 border-0"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            width="200"
+          />
+          <button type="submit" class="border-0 rounded-circle p-1 bg-white">
+            <span class="p-2" id="search-addon">
+              <i class="fa fa-search"></i>
+            </span>
+          </button>
+        </form>
+        <!-- Buscar por titulo de libro -->
+        <div class="w-25 d-flex justify-content-end align-items-center">
+          <div class="d-flex justify-content-end align-items-center">
+            <p class="text-white m-3">
+              <%= session.Name + " " + session.LastName %>
+            </p>
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+              class="rounded-circle"
+              height="45"
+              alt="Portrait of a Woman"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- NAVBAR -->
 
-    
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <% booksList.forEach((user) => {%>
-            <div class="col-md-4">
-              <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-primary"> $<%= user.Price %> </strong>
-                  <h3 class="mb-0">
-                    <p class="text-dark" href="#"><%= user.Title %></p>
-                  </h3>
-                  <div class="mb-1 text-muted"> <%= user.PublishedYear %> </div>
-                  <% let descriptionWords = user.Description.split(" "); %>
-                  <% let maxWords = 20; %>
-                  <% let limitedDescription = descriptionWords.slice(0, maxWords).join(" "); %>
-                  <p class="card-text mb-auto"> <%= limitedDescription %>... </p>
-                  <a href="#">Continue reading</a>
-                  <% if(session.Role === 'admin') %>
-                  <form action="/EditBook" method="post">
-                    <button class="btn btn-success">Edit</button>
-                  </form>
+    <div class="row" style="width: 190vh;">
+      <div class="col-md-9">
+        <!-- DIV PADRE -->
+        <div class="">
+          <div class="">
+            <div class="col-sm-9" style="width: 1300px">
+              <div class="contenido-principal">
+                <!-- Aquí va el contenido principal -->
+                <% if ( message !== "") { %>
+                <!-- Mensaje de stock no encontrado -->
+                <div
+                  class="card mx-auto text-white bg-danger mb-3 mt-5"
+                  style="max-width: 18rem"
+                >
+                  <div class="card-header">Libros no encontrados</div>
+                  <div class="card-body">
+                    <h5 class="card-title">No se encontro stock</h5>
+                    <p class="card-text"><%= message %></p>
+                  </div>
                 </div>
-                <img class="card-img-right flex-auto d-none d-md-block" src="<%= user.ImagePath %>" style="width: 200px; height: 250px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20250%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_18756f63101%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A13pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_18756f63101%22%3E%3Crect%20width%3D%22200%22%20height%3D%22250%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2256.1953125%22%20y%3D%22131%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                <!-- Mensaje de stock no encontrado -->
+                <% }else { %>
+                <!-- LIST OF BOOKS -->
+                <div class="album py-3">
+                  <div class="container">
+                    <div class="row">
+                      <% booksList.forEach((book) => {%>
+                      <div class="col-md-5 mt-2" id="elPapa">
+                        <div
+                          class="mx-auto w-100 rounded shadow p-3 mb-5 bg-white rounded"
+                          id="grandFather"
+                        >
+                          <!-- image -->
+                          <div class="">
+                            <a
+                              href="/BooksInformation?bookID=<%= book.bookID %>"
+                            >
+                              <img
+                                id="imageBook"
+                                class="shadow-lg rounded "
+                                src="<%= book.ImagePath %>"
+                                alt=""
+                              />
+                            </a>
+                          </div>
+                          <!-- image -->
+
+                          <!-- cap type -->
+                          <div id="capType">
+                            <p><%= book.PublishedYear > 2000 ? "Tapa Dura" : "Tapa Blanda" %></p>
+                            <hr id="lineaDivision" />
+                          </div>
+                          <!-- cap type -->
+
+                          <!-- INFORMATION -->
+                          <div id="informationSide">
+                            <p class="fw-bold"><%= book.Title %></p>
+                            <p class="text-secondary"><%= book.Autor %></p>
+                            <p></p>
+                            <p
+                              class="fw-bold text-<%= book.Stock == 0 ? 'danger' : `danger fs-4` %>"
+                            >
+                              <%= book.Stock == 0 ? "Temporalmente no disponible" : "$" + book.Price %>
+                            </p>
+                            <p class="text-success fw-bold">
+                              <%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS!" : "" %>
+                            </p>
+                          </div>
+                          <!-- INFORMATION -->
+                        </div>
+                      </div>
+                      <% }) %>
+                    </div>
+                  </div>
+                </div>
+                <!-- LIST OF BOOKS -->
+                <% } %>
               </div>
             </div>
-          <% }) %>
+          </div>
+        </div>
+        <!-- DIV PADRE -->
+        <!-- Aquí va la lista de libros -->
+      </div>
+      <div class="col-md-2">
+        <!-- Aquí va el menú sidebar -->
+        <div class="" style="width: 100%">
+          <div
+            class="aside d-flex flex-column align-items-start justify-content-end mt-5 p-3 shadow-lg bg-white rounded"
+          >
+            <!-- Aquí va el contenido del aside -->
+            <h3>Filters:</h3>
+            <!-- Default checkbox -->
+            <form action="/BooksIndex" method="POST">
+              <h5>Stock</h5>
+              <div class="btn-group d-flex flex-column" data-toggle="buttons">
+                <label class="">
+                  <input
+                    type="radio"
+                    name="optionsCheckbox"
+                    id="option1"
+                    autocomplete="off"
+                    value="1"
+                  />
+                  0 - 5
+                </label>
+                <label class="">
+                  <input
+                    type="radio"
+                    name="optionsCheckbox"
+                    id="option2"
+                    autocomplete="off"
+                    value="2"
+                  />
+                  5 - 15
+                </label>
+                <label class="">
+                  <input
+                    type="radio"
+                    name="optionsCheckbox"
+                    id="option3"
+                    autocomplete="off"
+                    value="3"
+                  />
+                  15 - 30
+                </label>
+                <label class="">
+                  <input
+                    type="radio"
+                    name="optionsCheckbox"
+                    id="option3"
+                    autocomplete="off"
+                    value="4"
+                  />
+                  30 - 50
+                </label>
+                <label class="">
+                  <input
+                    type="radio"
+                    name="optionsCheckbox"
+                    id="option3"
+                    autocomplete="off"
+                    value="5"
+                  />
+                  50 or more
+                </label>
+              </div>
+              <div class="d-flex flex-row align-items-center">
+                <button type="submit" class="btn btn-primary btn-rounde mt-5">
+                  Filter
+                </button>
+                <a
+                  href="/BooksIndex"
+                  class="btn btn-secondary btn-rounded mt-5"
+                  style="margin-left: 5px"
+                  >Clear</a
+                >
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-    
-    
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#sidebarMenu"
+      aria-controls="sidebarMenu"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </body>
 </html>

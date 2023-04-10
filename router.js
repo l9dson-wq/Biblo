@@ -13,6 +13,14 @@ const LogoutController = require('./Controller/session/Logout.Controller');
 const RenderBooksRegistrationController = require('./Controller/ViewsRender/RenderBooksRegistration');
 const UploadFileController = require('./Controller/UploadFile.Controller');
 const RenderBookIndexController = require('./Controller/ViewsRender/RenderBookIndex.Controller');
+const EditBooksController = require('./Controller/Books/EditBooks.Controller');
+const DeleteBookController = require("./Controller/Books/DeleteBooks.Controller");
+const RenderBooksInformationController = require("./Controller/ViewsRender/RenderBooksInformation.Controller");
+const BuyBookController = require("./Controller/Books/BuyBook.Contoller");
+const RenderFavoritesController = require("./Controller/ViewsRender/RenderFavorites.Controller");
+const FavoriteBookController = require("./Controller/Books/FavoriteBook.Controller");
+const SaveCommentController = require("./Controller/comments/SaveComments.Controller");
+const LikeCommentController = require("./Controller/comments/likesComments.Controller");
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -50,5 +58,30 @@ router.get('/BooksRegistration', isAuthenticatedController.isAuthenticated, Rend
 
 // renderizar la vista de la lista de libros
 router.get('/BooksIndex', isAuthenticatedController.isAuthenticated, RenderBookIndexController.RenderBookIndex );
+router.post('/BooksIndex', isAuthenticatedController.isAuthenticated, RenderBookIndexController.RenderBooksFilters );
+
+// edicion de libros
+router.post('/EditBook', isAuthenticatedController.isAuthenticated, EditBooksController.getBookInformation);
+router.post('/EditingBook', isAuthenticatedController.isAuthenticated, EditBooksController.editingBookInformation);
+
+// Eliminar libro
+router.post('/DeleteBook', isAuthenticatedController.isAuthenticated, DeleteBookController.DeleteBook);
+
+// Informacion de los libros
+router.get('/BooksInformation', isAuthenticatedController.isAuthenticated, RenderBooksInformationController.RenderBooksInformation);
+
+// Comprar libros
+router.post('/BuyBooks', isAuthenticatedController.isAuthenticated, BuyBookController.BuyBook);
+
+//Lista de favoritos
+router.get('/Favorites', isAuthenticatedController.isAuthenticated, RenderFavoritesController.RenderFavorites );
+//Guardar Favoritos
+router.post('/SaveFavorites', isAuthenticatedController.isAuthenticated, FavoriteBookController.FavoriteBook );
+
+//Guardar comentarios
+router.post('/SaveComment', isAuthenticatedController.isAuthenticated, SaveCommentController.SaveComment);
+//Like
+router.post('/LikeComment', isAuthenticatedController.isAuthenticated, LikeCommentController.LikeComment);
+router.post('/DisLikeComment', isAuthenticatedController.isAuthenticated, LikeCommentController.DisLikeComment);
 
 module.exports = router;

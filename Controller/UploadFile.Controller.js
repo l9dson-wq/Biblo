@@ -8,18 +8,22 @@ var rutaArchivo;
 
 const uploadFile = async (req, res) => {
   const file = req.file;
+
+  if(file){
+    if (!file) {
+      return res.status(400).send("No se seleccionó ninguna imagen");
+    }
   
-  if (!file) {
-    return res.status(400).send("No se seleccionó ninguna imagen");
+    rutaArchivo = "uploads/" + file.originalname;
+  
+    console.log(rutaArchivo);
+  
+    fs.rename(file.path, "public/uploads/" + file.originalname, (err) => {
+      if (err) throw err;
+    });
+  }else{
+    rutaArchivo = '/uploads/coverBooks.jpg';
   }
-
-  rutaArchivo = "uploads/" + file.originalname;
-
-  console.log(rutaArchivo);
-
-  fs.rename(file.path, "public/uploads/" + file.originalname, (err) => {
-    if (err) throw err;
-  });
 
   let title = req.body.title;
   let author = req.body.autor;
@@ -28,9 +32,18 @@ const uploadFile = async (req, res) => {
   let price = req.body.price;
   let stock = req.body.stock;
 
-  let result = await uploadBookModel.uploadBook(rutaArchivo, title, author, description, year, price, stock, req.session.userId);
+  let result = await uploadBookModel.uploadBook(
+    rutaArchivo,
+    title,
+    author,
+    description,
+    year,
+    price,
+    stock,
+    req.session.userId
+  );
 
-  res.send(result);
+  res.redirect("BooksIndex");
 };
 
 module.exports = { uploadFile };

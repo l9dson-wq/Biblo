@@ -13,19 +13,107 @@
     />
   </head>
   <body>
-    <h1>Biblo Home</h1>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-black bg-black">
+          <div class="container-fluid">
+            <div class="d-flex flex-row align-items-center">
+              <a class="navbar-brand text-white" href="/Home"
+                ><h1 class="display-6">Biblos</h1></a
+              >
+              <ul class="navbar-nav d-flex flex-row align-items-center">
+                <li class="nav-item m-2">
+                  <a
+                    class="nav-link active text-white"
+                    aria-current="page"
+                    href="/Home"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item m-2">
+                  <a class="nav-link active text-white" href="/BooksIndex"
+                    >Books</a
+                  >
+                </li>
+                <li class="nav-item m-2">
+                  <a class="nav-link active text-white" href="/Favorites"
+                    >Favorites</a
+                  >
+                </li>
+                <% if( session.Role === "Admin") { %>
+                <li class="nav-item m-2">
+                  <a class="nav-link active text-white" href="/"
+                    >admin. users</a
+                  >
+                </li>
+                <li class="nav-item m-2">
+                  <a class="nav-link active text-white" href="/BooksRegistration"
+                    >Regis. Book</a
+                  >
+                </li>
+                <% } %>
+              </ul>
+            </div>
+            <div class="w-25 d-flex justify-content-end align-items-center">
+              <div class="d-flex justify-content-end align-items-center">
+                <p class="text-white m-3">
+                  <%= session.Name + " " + session.LastName %>
+                </p>
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+                  class="rounded-circle"
+                  height="45"
+                  alt="Portrait of a Woman"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- NAVBAR -->
+
+    
     <% if ( session.userId !== undefined ) {%>
-    <p>Id: <%= session.userId %></p>
-    <p>Nombre: <%= session.Name %></p>
-    <p>Correo: <%= session.Email %></p>
-    <p>Tipo de usuario: <%= session.Role %></p>
+      <section class="">
+        <div class="container py-5 h-100">
+          <h1 class="mt-5 mx-auto text-center">Biblo Home</h1>
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-md-9 col-lg-7 col-xl-5">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                  <div class="d-flex text-black">
+                    <div class="flex-shrink-0">
+                      <img src="https://i1.sndcdn.com/artworks-AYlBqEjA6RVnW5wy-GxeWdg-t500x500.jpg"
+                        alt="Generic placeholder image" class="img-fluid"
+                        style="width: 180px; border-radius: 10px;">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <h5 class="mb-1"><%= session.Name %> <%= session.LastName %></h5>
+                      <p class="mb-2 pb-1" style="color: #2b2a2a;"><%= session.Role %></p>
+                      <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                        style="background-color: #efefef;">
+                        <div>
+                          <p class="small text-muted mb-1">Books</p>
+                          <p class="mb-0">3</p>
+                        </div>
+                        <div class="px-3">
+                          <p class="small text-muted mb-1">Id</p>
+                          <p class="mb-0"><%= session.userId %></p>
+                        </div>
+                      </div>
+                      <div class="d-flex pt-1">
+                        <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Edit profile</button>
+                        <a href="/Logout" class="btn btn-danger flex-grow-1">cerrar sesion</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </section>
     <% } %>
 
-    <a class="btn btn-danger m-3" href="/Logout">Cerra sesion</a>
-    <a class="btn btn-warning m-3" href="/">Ir a administracion de usuarios</a>
-    <a class="btn btn-success m-3" href="/BooksRegistration"
-      >Ir a registro de libros</a
-    >
-    <a class="btn btn-success m-3" href="/BooksIndex">Lista de libros</a>
   </body>
 </html>

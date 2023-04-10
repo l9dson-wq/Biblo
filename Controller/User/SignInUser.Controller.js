@@ -8,58 +8,61 @@ const UserSignIn = async (req, res) => {
     let uName = req.body.userName;
     let password = req.body.password;
 
-    let emailConfirmationBool;
-    let userFoundBool;
-    let userValidPassword;
-    let inputValid = "";
-
     let userInformation = await validateUserData(uName, password);
-    console.log(userInformation.result);
+    // Codigo de verificaciones en caso de que algo suceda!
+    // console.log("La password es valida?: ", userInformation.isValidPassword);
+    //console.log("El correo esta verificado?: ", userInformation.result.EmailConfirmed);
 
     if (userInformation.userFound === false) {
-      emailConfirmationBool = false;
-      userFound = false;
-      inputValid = "is-invalid";
-
       return res.render("SignIn", {
-        emailConfirmation: emailConfirmationBool,
-        userFound: userFoundBool,
-        inputValid: inputValid,
-        validPassword: userValidPassword,
+        emailConfirmation: false,
+        userFound: false,
+        inputValid: "is-invalid",
       });
-    } else {
-      if (!userInformation.isValidPassword) {
-        userValidPassword = false;
-        userFound = true;
-        inputValid = "is-invalid";
-        emailConfirmationBool =
-          userInformation.result["EmailConfirmed"] === "true" ? true : false;
+    }
 
-        return res.render("SignIn", {
-          emailConfirmation: emailConfirmationBool,
-          userFound: userFoundBool,
-          inputValid: inputValid,
-          validPassword: userValidPassword,
-        });
-      }
+    if (!userInformation.isValidPassword) {
+      return res.render("SignIn", {
+        userFound: true,
+        inputValid: "is-invalid",
+        validPassword: false,
+      });
+    }
 
-      if (userInformation.userFound && userInformation.isValidPassword) {
-        //agregando la sesion ( se podria serparar en una funcion a parte)
-        let userGot = userInformation.result;
-        req.session.userId = userGot.userID;
-        req.session.Name = userGot.Name;
-        req.session.Email = userGot.Email;
-        req.session.Role = userGot.UserRole;
+    if (
+      userInformation.isValidPassword === true &&
+      userInformation.userFound === true &&
+      userInformation.result.EmailConfirmed === "false"
+    ) {
+      return res.render("SignIn", {
+        emailConfirmation: false,
+        userFound: true,
+        inputValid: "is-invalid",
+        validPassword: true,
+      });
+    }
 
-        return res.redirect("Home");
-      }
+    if (
+      userInformation.userFound &&
+      userInformation.isValidPassword &&
+      userInformation.result.EmailConfirmed === "true"
+    ) {
+      //agregando la sesion
+      let userGot = userInformation.result;
+      req.session.userId = userGot.userID;
+      req.session.Name = userGot.Name;
+      req.session.Email = userGot.Email;
+      req.session.Role = userGot.UserRole;
+      req.session.LastName = userGot.LastName;
+
+      return res.redirect("Home");
     }
 
     res.render("SignIn", {
-      emailConfirmation: emailConfirmationBool,
-      userFound: userFoundBool,
-      inputValid: inputValid,
-      validPassword: userValidPassword,
+      emailConfirmation: true,
+      userFound: true,
+      inputValid: "is-invalid",
+      validPassword: true,
     });
   } catch (error) {
     console.log(`Ocurrio un error en SignInUser.Controller: ${error}`);

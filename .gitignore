@@ -11,3 +11,6 @@ package.json
 
 #Variables Locales
 .env
+
+#Carpeta de las imagenes
+public/uploads

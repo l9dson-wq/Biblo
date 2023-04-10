@@ -1,0 +1,29 @@
+#contenedorSupremo {
+  background-image: url("/background/image.jpg");
+  background-position: center;
+}
+
+#informationSide {
+  width: 1000px;
+}
+
+#btnComprar{
+  background-color: #D9017A;
+}
+
+#btnComprarDisabled{
+  background-color: #F15A59;
+  text-decoration: line-through;
+}
+
+.modal-transparent {
+  background-color: transparent;
+}
+
+#hideCommentsBtn:hover{
+  cursor: pointer;
+}
+
+#load-more:hover{
+  cursor: pointer;
+}
