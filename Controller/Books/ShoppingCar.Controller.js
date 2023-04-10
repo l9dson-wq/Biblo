@@ -23,9 +23,9 @@ const shoppingCar = async (req, res) => {
     let result = await shoppingCarModel.shoppingCar(userId, bookId, bookTitle, bookImagePath, bookPrice);
 
     if(result){
-        return res.send("Carrito de compra agregado de manera correcta");
+        return res.redirect(`BooksInformation?bookID=${bookId}`);
     }else{
-        return res.send("Carrito de compra no agregado");
+        return res.redirect(`BooksInformation?bookID=${bookId}`);
     }
 };
 

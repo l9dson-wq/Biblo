@@ -12,6 +12,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/favoritesStyles.css" />
+    <script
+    src="https://kit.fontawesome.com/b55d7e5cd9.js"
+    crossorigin="anonymous"
+    ></script>
   </head>
   <body class="">
     <!-- NAVBAR -->
@@ -38,6 +42,11 @@
                 >Favorites</a
               >
             </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/Cesta"
+                >Cesta</a
+              >
+            </li>
             <% if( session.Role === "Admin") { %>
             <li class="nav-item m-2">
               <a class="nav-link active text-white" href="/">admin. users</a>
@@ -52,7 +61,13 @@
         </div>
         <div class="w-25 d-flex justify-content-end align-items-center">
           <div class="d-flex justify-content-end align-items-center">
-            <p class="text-white m-3">
+            <a href="/Cesta" class="me-1 d-flex justify-content-center align-items-center">
+              <p class="text-white">
+                <i class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"></i>
+                <span class="badge badge-danger bg-danger badge-pill position-absolute" style="top: 30px; right: 230px; border-radius: 50%;"><%= totalNoti %> </span>
+              </p>
+            </a>
+            <p class="text-white m-3 ms-5">
               <%= session.Name + " " + session.LastName %>
             </p>
             <img

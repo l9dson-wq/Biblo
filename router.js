@@ -23,6 +23,7 @@ const SaveCommentController = require("./Controller/comments/SaveComments.Contro
 const LikeCommentController = require("./Controller/comments/likesComments.Controller");
 const ActivateUserByAdminController = require("./Controller/User/ActivateAccountAdmin.Controller");
 const shoppingCarController = require("./Controller/Books/ShoppingCar.Controller");
+const RenderCestaController = require("./Controller/ViewsRender/RenderCesta.Controller");
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -91,5 +92,6 @@ router.post('/ActivateUser', isAuthenticatedController.isAuthenticated, Activate
 
 //Agregar a la cesta
 router.post('/AddToCar', isAuthenticatedController.isAuthenticated, shoppingCarController.shoppingCar );
+router.get('/Cesta', isAuthenticatedController.isAuthenticated, RenderCestaController.RenderCesta )
 
 module.exports = router;

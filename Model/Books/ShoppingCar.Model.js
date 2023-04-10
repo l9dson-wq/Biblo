@@ -25,4 +25,15 @@ const shoppingCar = async (userId, bookId, bookTitle, bookImagePath, bookPrice) 
     }
 };
 
-module.exports = { shoppingCar, };
+const getAllShoppingCar = async (userId) => {
+    try{
+        let result = await sql.query(
+            `SELECT * FROM ShoppingCar WHERE userId = ${userId}`
+        );
+        return result.recordset;
+    }catch(erro){
+        console.log("Ocurrio un error obteniendo los carritos de compra: ", error);
+    }
+}; 
+
+module.exports = { shoppingCar, getAllShoppingCar, };
