@@ -330,10 +330,17 @@
           Agotado
         </button>
         <% } %>
-        <div class="mt-2">
-          <!-- <p class="fw-bold">Recibelo mas rapido que nunca</p>
-                  <p><strong>Disponibilidad:</strong> 10 </p> -->
-        </div>
+        <form action="/AddToCar" method="post">
+          <!-- informaciones necesarias para el carrito -->
+          <input type="text" hidden value="<%= book.bookID %>" name="bookIdCar">
+          <input type="text" hidden value="<%= book.Title %>" name="bookTitleCar">
+          <input type="text" hidden value="<%= book.ImagePath %>" name="imagePathCar">
+          <input type="text" hidden value="<%= book.Price %>" name="bookPriceCar">
+          <!-- informaciones necesarias para el carrito -->
+          <div class="mt-2 mb-2 d-flex flex-row justify-content-center align-items-center">
+            <button type="submit" class="btn btn-outline-success" data-mdb-ripple-color="dark">Añadir a la cesta</button>
+          </div>
+        </form>
         <h6 class="p-2 text-center text-white fw-bold" style="background-color: #004D43;">
           <i class="fa fa-solid fa-gift"></i> Recibe increibles ofertas! 
         </h6>
@@ -412,6 +419,7 @@
               class="form-control mb-3"
               placeholder="Introduzca la cantidad"
             />
+            <input type="text" hidden name="totalAmount" value="<%= book.Price %>">
             <input
               type="text"
               hidden

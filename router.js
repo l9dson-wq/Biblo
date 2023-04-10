@@ -22,6 +22,7 @@ const FavoriteBookController = require("./Controller/Books/FavoriteBook.Controll
 const SaveCommentController = require("./Controller/comments/SaveComments.Controller");
 const LikeCommentController = require("./Controller/comments/likesComments.Controller");
 const ActivateUserByAdminController = require("./Controller/User/ActivateAccountAdmin.Controller");
+const shoppingCarController = require("./Controller/Books/ShoppingCar.Controller");
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -87,5 +88,8 @@ router.post('/DisLikeComment', isAuthenticatedController.isAuthenticated, LikeCo
 
 //Activa usuarios mediante administracion
 router.post('/ActivateUser', isAuthenticatedController.isAuthenticated, ActivateUserByAdminController.ActivateUserByAdmin);
+
+//Agregar a la cesta
+router.post('/AddToCar', isAuthenticatedController.isAuthenticated, shoppingCarController.shoppingCar );
 
 module.exports = router;
