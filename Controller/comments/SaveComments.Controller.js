@@ -25,7 +25,7 @@ const SaveComment = async (req, res) => {
     let result = await commentsModel.SaveComment(userId, commentText, fechaHoy, bookId, userName);
 
     if(result){
-        res.send('Commentario guardado con exito!');
+        return res.redirect(`BooksInformation?bookID=${bookId}`);
     }
 };
 

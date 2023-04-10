@@ -187,10 +187,10 @@
               <% comments.slice(0, 2).forEach((item) => { %>
                 <!-- Código de un comentario -->
                 <div class="d-flex flex-start mb-4">
-                  <img class="rounded-circle shadow-1-strong me-3"
+                  <img class="rounded-circle shadow-1-strong me-3 shadow border border-1 border-disable"
                     src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
                     height="65" />
-                  <div class="card w-100">
+                  <div class="card w-100 border-disable">
                     <div class="card-body p-4">
                       <div class="">
                         <h5><%= item.userFullName %></h5>
@@ -245,10 +245,15 @@
                           <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
                           <div class="d-flex align-items-center">
                             <form action="/LikeComment" method="post">
+                              <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
                               <input type="text" hidden value="<%= item.commentID %>" name="commentId">
-                              <button type="submit" class="link-muted me-2"><i class="fas fa-thumbs-up me-1"></i><%= item.totalLikes %></button>
+                              <button type="submit" class="me-2 btn-outline border-0 bg-white text-success"><i class="fas fa-thumbs-up me-1"></i><%= item.totalLikes %></button>
                             </form>
-                            <a href="#!" class="link-muted"><i class="fas fa-thumbs-down me-1"></i>0</a>
+                            <form action="/DisLikeComment" method="post">
+                              <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
+                              <input type="text" hidden value="<%= item.commentID %>" name="commentId">
+                              <button type="submit" class="me-2 btn-outline border-0 bg-white text-danger"><i class="fas fa-thumbs-down me-1"></i><%= item.totalDisLikes %></button>
+                            </form>
                           </div>
                           <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
                         </div>
