@@ -19,7 +19,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body id="">
+  <body id="" class="bg-disable">
         <!-- NAVBAR -->
         <nav class="navbar navbar-black bg-black fixed-top mb-5">
           <div class="container-fluid">
@@ -84,7 +84,7 @@
       <div>
         <div
           id="grandFather"
-          class="p-5 me-5 mx-auto w-75 d-flex mt-5 shadow p-3 mb-5 bg-white rounded m-0"
+          class="p-5 me-5 mx-auto w-75 d-flex mt-5 p-3 mb-5 bg-white rounded shadow"
         >
           <!-- Image part -->
           <div id="imageSide" class="me-5">
@@ -107,13 +107,21 @@
             <div
               class="ms-4 mt-5 mb-5 d-flex flex-row justify-content-center align-items-center"
             >
-              <div class="bg-dark text-white p-2 rounded ms-2">Action</div>
-              <div class="bg-dark text-white p-2 rounded ms-2">Romance</div>
-              <div class="bg-dark text-white p-2 rounded ms-2">Thriller</div>
+              <% if( book.firstGenre !== "") { %>
+                <div class="bg-dark text-white p-2 rounded ms-2"><%= book.firstGenre %></div>
+              <% } %>  
+              <% if( book.secondGenre !== "") { %>
+                <div class="bg-dark text-white p-2 rounded ms-2"><%= book.secondGenre %></div>
+              <% } %>  
+              <% if( book.thirdGenre !== "") { %>
+                <div class="bg-dark text-white p-2 rounded ms-2"><%= book.thirdGenre %></div>
+              <% } %>  
             </div>
 
             <strong class="h5 mb-2">Resumen de <%= book.Title  %> </strong>
-            <p style="white-space: pre-line; font-family: 'Times New Roman', Times, serif;" class="h5 mt-2">-<%= book.Description.replace(/\./g, ".\n") %></p>
+            <p id="description" style="white-space: pre-line; font-family: 'Times New Roman', Times, serif;" class="h5 mt-2">
+              -<%= book.Description.replace(/\./g, ".\n") %>
+            </p>
           </div>
         </div>
         <div
@@ -125,7 +133,7 @@
           >
             <div>
               <strong>Paginas</strong>
-              <p>400</p>
+              <p><%= book.bookPages %> </p>
               <strong>Stock en venta</strong>
               <p><%= book.Stock %></p>
               <input
@@ -135,7 +143,7 @@
                 id="inputBookStock"
               />
               <strong>Idioma</strong>
-              <p>Español</p> 
+              <p><%= book.bookLanguages%> </p> 
             </div>
             <div>
               <strong>Autor</strong>
@@ -148,6 +156,18 @@
             <div>
               <strong>Encuardernacion</strong>
               <p><%= book.PublishedYear < 2000 ? "Tapa blanda" : "Tapa gruesa" %> </p>
+              <% if( book.firstGenre !== "") { %>
+                <strong>Ficcion</strong>
+                <p><%= book.firstGenre %> </p>
+              <% } %>  
+              <% if( book.secondGenre !== "") { %>
+                <strong>No Ficcion</strong>
+                <p><%= book.secondGenre %> </p>
+              <% } %>  
+              <% if( book.thirdGenre !== "") { %>
+                <strong>Comic y Manga</strong>
+                <p><%= book.thirdGenre %> </p>
+              <% } %>  
             </div>
           </div>
           <hr>
@@ -276,10 +296,10 @@
         </div>
       </div>
       <div
-        class="p-4 me-5 mx-auto d-flex flex-column mt-5 shadow mb-5 bg-white align-self-start"
+        class="p-4 me-5 mx-auto d-flex flex-column mt-5 bg-white align-self-start"
       >
         <div class="d-flex justify-content-end align-items-end">
-          <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "danger" %>  me-4">$<%= book.Price %></p>
+          <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "black" %>  me-4">$<%= book.Price %></p>
           <p class="w-100 <%= book.Stock <= 5 && book.Stock > 1 ? "text-success" : "text-decoration-line-through" %> ">
             <%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS! " : "¡ENVÍO GRATIS! " %><i class="fa fa-solid fa-truck"></i>
           </p>
@@ -314,10 +334,10 @@
           <!-- <p class="fw-bold">Recibelo mas rapido que nunca</p>
                   <p><strong>Disponibilidad:</strong> 10 </p> -->
         </div>
-        <h6 class="p-2 text-center text-white fw-bold bg-success">
+        <h6 class="p-2 text-center text-white fw-bold" style="background-color: #004D43;">
           Recibe increibles ofertas! <i class="fa fa-solid fa-gift"></i>
         </h6>
-        <div class="d-flex justify-content-around align-items-center mt-5">
+        <div class="d-flex justify-content-around align-items-center mt-5 mb-5">
           <form action="/SaveFavorites" method="post">
             <input
               type="text"
@@ -326,12 +346,12 @@
               id="bookId"
               value="<%= book.bookID %>"
             />
-            <button class="bg p-2 rounded border bg-dark text-white">
-              <i class="fa fa-regular fa-heart me-1 <%= favoriteChecked === false ? "text-white" : "text-danger" %> "></i>
-              Guardar
+            <button class="bg-white text-black btn-outline border-0">
+              <i class="fa fa-regular fa-heart me-1 <%= favoriteChecked === false ? "text-black" : "text-danger" %> "></i>
+              GUARDAR
             </button>
           </form>
-          <button class="bg p-2 rounded border bg-dark text-white">
+          <button class="bg-white text-black btn-outline border-0">
             <i class="fa fa-solid fa-copy me-1"></i>
             Copy link
           </button>
@@ -482,6 +502,38 @@
           toggleButton.textContent = "Ocultar formulario";
         }
       });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      var maxCharCount = 150; // Número máximo de caracteres a mostrar antes de "Mostrar más"
+      var description = $('#description').text().trim(); // Obtener el contenido de la etiqueta p y quitar espacios en blanco
+      if (description.length > maxCharCount) {
+        var shortDescription = description.substr(0, maxCharCount) + '...'; // Obtener solo los primeros maxCharCount caracteres y agregar puntos suspensivos
+        var longDescription = description; // Obtener todo el contenido del elemento
+        var isExpanded = false; // Establecer el estado inicial
+        
+        $('#description').text(shortDescription); // Reemplazar el contenido de la etiqueta p con el texto corto
+        
+        // Agregar un enlace "Mostrar más"
+        var showMoreLink = $('<a href="#">Mostrar más</a>');
+        showMoreLink.click(function(e) {
+          e.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+          if (isExpanded) {
+            $('#description').text(shortDescription); // Reemplazar el contenido de la etiqueta p con el texto corto
+            showMoreLink.text('Mostrar más'); // Cambiar el texto del enlace a "Mostrar más"
+            isExpanded = false; // Cambiar el estado a no expandido
+          } else {
+            $('#description').text(longDescription); // Reemplazar el contenido de la etiqueta p con el texto completo
+            showMoreLink.text('Mostrar menos'); // Cambiar el texto del enlace a "Mostrar menos"
+            isExpanded = true; // Cambiar el estado a expandido
+          }
+        });
+        
+        $('#description').after(showMoreLink); // Agregar el enlace después del elemento p
+      }
+    });
     </script>
 
     <script src="scripts/modalSuccess.js"></script>

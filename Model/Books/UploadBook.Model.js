@@ -8,12 +8,19 @@ const uploadBook = async (
   year,
   price,
   stock,
-  createdBy
+  createdBy,
+  totalPages,
+  bookLanguage,
+  genre1,
+  genre2,
+  genre3,
 ) => {
   try {
     await sql.query(
-      `INSERT INTO Books (ImagePath, Title, Autor, Description, PublishedYear, Price, Stock, BookedByID) 
-      VALUES ('${imagePath}','${title}','${author}','${description}',${year},${price},${stock},${createdBy})`
+      `INSERT INTO Books 
+      (ImagePath, Title, Autor, Description, PublishedYear, Price, Stock, BookedByID, bookPages, bookLanguages, firstGenre, secondGenre, thirdGenre) 
+      VALUES 
+      ('${imagePath}','${title}','${author}','${description}',${year},${price},${stock},${createdBy},${totalPages},'${bookLanguage}','${genre1}','${genre2}','${genre3}')`
     );
 
     return `${title}  fue agregado correctamente`;

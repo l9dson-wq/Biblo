@@ -31,6 +31,11 @@ const uploadFile = async (req, res) => {
   let year = req.body.year;
   let price = req.body.price;
   let stock = req.body.stock;
+  let genre1 = req.body.genre1;
+  let genre2 = req.body.genre2;
+  let genre3 = req.body.genre3;
+  let totalPages = req.body.bookPages;
+  let bookLanguage = req.body.bookLanguage;
 
   price = parseFloat(price);
 
@@ -42,7 +47,12 @@ const uploadFile = async (req, res) => {
     year,
     price,
     stock,
-    req.session.userId
+    req.session.userId,
+    totalPages,
+    bookLanguage,
+    genre1,
+    genre2,
+    genre3,
   );
 
   res.redirect("BooksIndex");

@@ -182,6 +182,57 @@
           value=""
         />
 
+        <label for="stock" class="form form-label"><strong>Paginas totales</strong></label>
+        <input type="number" class="form form-control text-center" id="bookPages" name="bookPages" required>
+
+        <label for="stock" class="form form-label"><strong>Lenguaje</strong></label>
+        <select name="bookLanguage" id="bookLanguage" class="form form-select" required>
+          <option value="Español">Español</option>
+          <option value="Ingles">Ingles</option>
+          <option value="Frances">Frances</option>
+          <option value="Chino">Chino</option>
+          <option value="Japones">Japones</option>
+        </select>
+
+        <label for="stock" class="form form-label"><strong>Generos de literatura</strong></label>
+        <select name="genre1" id="genre1" class="form form-select">
+          <option value="">--Nada--</option>
+          <option value="Contemporanea">Contemporanea</option>
+          <option value="Estudios literarios">Estudios literarios</option>
+          <option value="Clasicos">Clasicos</option>
+          <option value="Cuentos">Cuentos</option>
+          <option value="Poesia">Poesia</option>
+          <option value="Teatro">Teatro</option>
+          <option value="Libros de bolsillo">Libros de bolsillo</option>
+        </select>
+
+        <label for="stock" class="form form-label"><strong>Generos literarios</strong></label>
+        <select name="genre2" id="genre2" class="form form-select">
+          <option value="">--Nada--</option>
+          <option value="Novela romantica y erotica">Novela romantica y erotica</option>
+          <option value="Novela negra">Novela negra</option>
+          <option value="Novela fantastica">Novela fantastica</option>
+          <option value="Novela de ciencia ficcion">Novela de ciencia ficcion</option>
+          <option value="Novela de terror">Novela de terror</option>
+          <option value="Narrativa de humor">Narrativa de humor</option>
+          <option value="Narrativa de viajes">Narrativa de viajes</option>
+        </select>
+
+        <label for="stock" class="form form-label"><strong>Comics y Manga</strong></label>
+        <select name="genre3" id="genre3" class="form form-select">
+          <option value="">--Nada--</option>
+          <option value="Novela grafica americana">Novela grafica americana</option>
+          <option value="Novela grafica europea">Novela grafica europea</option>
+          <option value="Novela grafica de otros paises">Novela grafica de otros paises</option>
+          <option value="Libros de ilustracion">Libros de ilustracion</option>
+          <option value="Comic de humor">Comic de humor</option>
+          <option value="Comic erotico">Comic erotico</option>
+          <option value="Seinin">Seinin</option>
+          <option value="Hentai">Hentai</option>
+          <option value="Shonen">Shonen</option>
+          <option value="Shojo">Shojo</option>
+        </select>
+
         <div
           class="d-flex flex-column justify-content-center align-items-center mt-5"
         >
@@ -197,7 +248,7 @@
 
         <div>
           <button type="submit" class="btn btn-success btn-rounded mt-5">
-            Success
+            Guardar
           </button>
           <a class="btn btn-warning mt-5" href="/BooksIndex">Cancelar</a>
         </div>
