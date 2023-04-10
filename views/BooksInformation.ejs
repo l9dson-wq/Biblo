@@ -19,7 +19,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body id="contenedorSupremo">
+  <body id="">
         <!-- NAVBAR -->
         <nav class="navbar navbar-black bg-black fixed-top mb-5">
           <div class="container-fluid">
@@ -112,8 +112,8 @@
               <div class="bg-dark text-white p-2 rounded ms-2">Thriller</div>
             </div>
 
-            <strong>Resumen de <%= book.Title  %> </strong>
-            <p><%= book.Description %></p>
+            <strong class="h5 mb-2">Resumen de <%= book.Title  %> </strong>
+            <p style="white-space: pre-line; font-family: 'Times New Roman', Times, serif;" class="h5 mt-2">-<%= book.Description.replace(/\./g, ".\n") %></p>
           </div>
         </div>
         <div
@@ -270,7 +270,7 @@
         </div>
       </div>
       <div
-        class="p-4 me-5 mx-aut w-50 d-flex flex-column mt-5 shadow mb-5 bg-white rounded m-0 align-self-start"
+        class="p-4 me-5 mx-auto d-flex flex-column mt-5 shadow mb-5 bg-white align-self-start"
       >
         <div class="d-flex justify-content-end align-items-end">
           <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "danger" %>  me-4">$<%= book.Price %></p>
@@ -280,8 +280,7 @@
         </div>
         <% if (book.Stock !== 0) { %>
         <button
-          class="mx-auto border-0 text-white rounded shadow p-2 mt-2 h5"
-          style="width: 200px"
+          class="mx-aut border-0 text-white rounded p-2 mt-2 h5"
           id="btnComprar"
           onclick="document.getElementById('myModal').style.display='block'"
         >
@@ -289,7 +288,7 @@
         </button>
         <% } else {%>
         <button
-          class="mx-auto border-0 text-white rounded shadow p-2 mt-2 h5"
+          class="mx-auto border-0 text-white rounded p-2 mt-2 h5"
           style="width: 200px"
           id="btnComprarDisabled"
           onclick="document.getElementById('myModal').style.display='block'"
@@ -302,7 +301,7 @@
           <!-- <p class="fw-bold">Recibelo mas rapido que nunca</p>
                   <p><strong>Disponibilidad:</strong> 10 </p> -->
         </div>
-        <h6 class="p-2 text-center text-white fw-bold shadow bg-success">
+        <h6 class="p-2 text-center text-white fw-bold bg-success">
           Recibe increibles ofertas! <i class="fa fa-solid fa-gift"></i>
         </h6>
         <div class="d-flex justify-content-around align-items-center mt-5">
@@ -314,17 +313,17 @@
               id="bookId"
               value="<%= book.bookID %>"
             />
-            <button class="bg p-2 rounded border shadow bg-dark text-white">
+            <button class="bg p-2 rounded border bg-dark text-white">
               <i class="fa fa-regular fa-heart me-1 <%= favoriteChecked === false ? "text-white" : "text-danger" %> "></i>
               Guardar
             </button>
           </form>
-          <button class="bg p-2 rounded border shadow bg-dark text-white">
+          <button class="bg p-2 rounded border bg-dark text-white">
             <i class="fa fa-solid fa-copy me-1"></i>
             Copy link
           </button>
         </div>
-        <div class="d-flex justify-content-around align-items-center mt-5">
+        <div class="d-flex mt-1 justify-content-center align-items-center">
           <% if ( session.Role === "Admin") { %>
             <form action="/EditBook" method="post">
               <input
@@ -334,7 +333,7 @@
                 id="bookId"
                 value="<%= book.bookID %>"
               />
-              <button class="bg p-2 rounded border shadow bg-primary text-white">
+              <button class=" p-2 rounded border bg-primary text-white">
                 <i class="fa fa-solid fa-marker"></i>
                 Editar
               </button>
@@ -347,7 +346,7 @@
                 id="bookId"
                 value="<%= book.bookID %>"
               />
-              <button class="bg p-2 rounded border shadow bg-danger text-white">
+              <button class="bg p-2 rounded border bg-danger text-white">
                 <i class="fa fa-sharp fa-solid fa-trash"></i>
                 Eliminar
               </button>
