@@ -84,7 +84,7 @@
       <tbody>
         <% resultList.forEach((user) => {%>
         <tr>
-          <th scope="row"><%= user.usuarioID %></th>
+          <th scope="row"><%= user.userID %></th>
           <td><%= user.Name %></td>
           <td><%= user.LastName %></td>
           <td><%= user.Email %></td>
@@ -93,7 +93,14 @@
           <td
             class="text-light bg-<%= user.EmailConfirmed === 'true' ? 'success' : 'danger' %>"
           >
-            <%= user.EmailConfirmed === 'true' ? 'Active' : 'Inactive' %>
+            <% if ( user.EmailConfirmed !== "true") { %>
+              <form action="/ActivateUser" method="post">
+                <input type="text" hidden value="<%= user.userID %>" name="userIdInput"> 
+                <button class="btn-outline-danger bg-danger border-0 text-white" type="submit">Inactive</button>
+              </form>
+            <% } else {%>
+              <%= "Active" %> 
+            <% } %> 
           </td>
         </tr>
         <% }) %>

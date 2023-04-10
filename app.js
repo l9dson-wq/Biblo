@@ -26,11 +26,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-app.use(upload.single('image'));
+app.use(upload.single("image"));
 
 app.use(nocache());
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 

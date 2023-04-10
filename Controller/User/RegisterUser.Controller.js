@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const { insertUser } = require("../../Model/User/RegisterUser.Model");
+const fs = require("fs");
 
 var nombre;
 var apellido;

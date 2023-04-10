@@ -21,6 +21,7 @@ const RenderFavoritesController = require("./Controller/ViewsRender/RenderFavori
 const FavoriteBookController = require("./Controller/Books/FavoriteBook.Controller");
 const SaveCommentController = require("./Controller/comments/SaveComments.Controller");
 const LikeCommentController = require("./Controller/comments/likesComments.Controller");
+const ActivateUserByAdminController = require("./Controller/User/ActivateAccountAdmin.Controller");
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -83,5 +84,8 @@ router.post('/SaveComment', isAuthenticatedController.isAuthenticated, SaveComme
 //Like
 router.post('/LikeComment', isAuthenticatedController.isAuthenticated, LikeCommentController.LikeComment);
 router.post('/DisLikeComment', isAuthenticatedController.isAuthenticated, LikeCommentController.DisLikeComment);
+
+//Activa usuarios mediante administracion
+router.post('/ActivateUser', isAuthenticatedController.isAuthenticated, ActivateUserByAdminController.ActivateUserByAdmin);
 
 module.exports = router;

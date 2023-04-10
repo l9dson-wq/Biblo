@@ -127,13 +127,14 @@
                           id="grandFather"
                         >
                           <!-- image -->
-                          <div class="">
+                          <div class="w-100 d-flex justify-content-center align-items-center">
                             <a
                               href="/BooksInformation?bookID=<%= book.bookID %>"
+                              class="d-flex justify-content-center align-items-center"
                             >
                               <img
                                 id="imageBook"
-                                class="shadow-lg rounded "
+                                class="shadow-lg rounded"
                                 src="<%= book.ImagePath %>"
                                 alt=""
                               />
@@ -149,7 +150,7 @@
                           <!-- cap type -->
 
                           <!-- INFORMATION -->
-                          <div id="informationSide">
+                          <div id="informationSide" class="w-100 d-flex flex-column justify-content-start align-items-start">
                             <p class="fw-bold"><%= book.Title %></p>
                             <p class="text-secondary"><%= book.Autor %></p>
                             <p></p>

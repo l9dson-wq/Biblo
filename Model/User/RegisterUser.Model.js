@@ -5,7 +5,14 @@ const {
 const { sendToken } = require("../../Controller/generateToken.Controller");
 const { setTokenReceived } = require("../../Controller/sendEmail.Controller");
 
-async function insertUser(nombre, apellido, correo, usuario, password, userRole) {
+async function insertUser(
+  nombre,
+  apellido,
+  correo,
+  usuario,
+  password,
+  userRole
+) {
   try {
     let tokenForUser = sendToken();
 

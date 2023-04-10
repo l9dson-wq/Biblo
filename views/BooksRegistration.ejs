@@ -145,18 +145,6 @@
           value=""
         />
 
-        <!-- <label for="price" class="form form-label"><strong>Precio</strong></label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            min="0"
-            max="10000"
-            placeholder="$Precio"
-            required
-            class="form form-control text-center"
-            value=""
-          /> -->
         <label for="price" class="form form-label"
           ><strong>Precio</strong></label
         >
@@ -214,6 +202,21 @@
     </div>
     <!-- FORM -->
 
+    <!-- Modal de éxito -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">Operación exitosa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            La operación se ha realizado con éxito.
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       function showPreview(event) {
         const file = event.target.files[0];
@@ -231,5 +234,7 @@
         }
       }
     </script>
+
+    <script src="/scripts/ShowMessage.js"></script>
   </body>
 </html>
