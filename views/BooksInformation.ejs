@@ -134,6 +134,8 @@
                 value="<%= book.Stock %>"
                 id="inputBookStock"
               />
+              <strong>Idioma</strong>
+              <p>Español</p> 
             </div>
             <div>
               <strong>Autor</strong>
@@ -142,6 +144,10 @@
               <p>LIBROS DEL ASTEROIDE</p>
               <strong>Año de publicacion</strong>
               <p><%= book.PublishedYear %></p>
+            </div>
+            <div>
+              <strong>Encuardernacion</strong>
+              <p><%= book.PublishedYear < 2000 ? "Tapa blanda" : "Tapa gruesa" %> </p>
             </div>
           </div>
           <hr>
@@ -278,7 +284,7 @@
             <%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS! " : "¡ENVÍO GRATIS! " %><i class="fa fa-solid fa-truck"></i>
           </p>
         </div>
-        <% if (book.Stock !== 0) { %>
+        <% if (book.Stock !== 0 && session.Role !== "Admin") { %>
         <button
           class="mx-aut border-0 text-white rounded p-2 mt-2 h5"
           id="btnComprar"
@@ -286,6 +292,13 @@
         >
           Comprar
         </button>
+        <% } else if ( session.Role === "Admin") { %>
+          <button
+          class="mx-aut w-100 bg-disable border-0 text-white rounded p-2 mt-2 h5"
+          id=""
+          >
+            Comprar
+          </button>
         <% } else {%>
         <button
           class="mx-auto border-0 text-white rounded p-2 mt-2 h5"
