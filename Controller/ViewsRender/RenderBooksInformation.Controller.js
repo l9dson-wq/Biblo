@@ -20,11 +20,16 @@ const RenderBooksInformation = async (req, res) => {
   let bookComments = await commentsModel.GetComments(userID, bookID);
 
   let totalShoppingCar = await getAllShoppingCarModel.getAllShoppingCar(userID);
-  let totalShoppingCarNumber = Number(totalShoppingCar.length);
-  console.log(totalShoppingCarNumber);
 
+  //SACANDO EL PORCENTAJE
+  if( result[0].Stock >= 5 && result[0].Stock > 1){
+    result[0].Discount = parseFloat((14 * parseFloat(result[0].Price)) / 100).toFixed(2);
+  }
+
+  //PONER DESCUENTO AL PRECIO
   let totalPrice = 0;
   let totalBooks = 0;
+
 
   //SUMO EL PRECIO TOTAL DE TODOS LOS LIBROS Y EL TOTAL DE LAS UNIDADES
   for (let i = 0; i < totalShoppingCar.length; i++) {

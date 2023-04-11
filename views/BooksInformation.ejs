@@ -170,7 +170,7 @@
                   <p class="fs-5 me-4 text-decoration-line-through text-danger">$<%= book.Price %></p>
                   <span style="font-size: 85%;" class="bg-danger p-1 text-white w-100 h-25">-5% de dto. excusivo</span>
                 </div>
-                <p class="h2 me-4">$<%= Number(book.Price - 3.20).toFixed(2) %></p>
+                <p class="h2 me-4">$<%= book.Discount %></p>
               <% } else { %>
                 <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "black" %>  me-4">$<%= book.Price %></p>
               <% } %>
