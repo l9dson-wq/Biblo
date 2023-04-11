@@ -58,6 +58,7 @@ const RenderBooksFilters = async (req, res) => {
   let stockSelected = req.body.optionsCheckbox;
   let searchName = req.body.searchName;
   let books;
+  let userID = req.session.userId;
 
   if (stockSelected === "" || stockSelected === undefined) {
     books = await GetAllBooksModel.GetlAllBookWithFilters(searchName, true);
@@ -75,11 +76,38 @@ const RenderBooksFilters = async (req, res) => {
     };
   });
 
+    // ----
+    let totalShoppingCar = await getAllShoppingCarModel.getAllShoppingCar(userID);
+    let totalShoppingCarNumber = Number(totalShoppingCar.length);
+    console.log(totalShoppingCarNumber);
+  
+    let totalPrice = 0;
+    let totalBooks = 0;
+  
+    //SUMO EL PRECIO TOTAL DE TODOS LOS LIBROS Y EL TOTAL DE LAS UNIDADES
+    for (let i = 0; i < totalShoppingCar.length; i++) {
+      totalPrice += totalShoppingCar[i].totalPrice;
+      totalBooks += Number(totalShoppingCar[i].bookAmount);
+    }
+    //REDONDEO EL NUMERO A SOLO DOS DECIMALES DESPUES DEL PUNTO
+    totalPrice = parseFloat(totalPrice.toFixed(2));
+  
+    //Obtener la fecha en cierto formato
+    let fecha = new Date();
+    let dia = fecha.getDate().toString().padStart(2, '0');
+    let mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    let anio = fecha.getFullYear().toString();
+  
+    let fechaHoy = dia + '/' + mes + '/' + anio;
+    //Obtener la fecha en cierto formato
+
   res.render("BooksIndex", {
     session: req.session,
     booksList: booksNew,
     message: books.errorMessage,
     nameSearched: searchName,
+    totalNoti: totalBooks,
+    fechaHoy: fechaHoy,
   });
 };
 

@@ -19,7 +19,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body id="" class="bg-disable">
+  <body id="" class="bg-white">
         <!-- NAVBAR -->
         <nav class="navbar navbar-black bg-black fixed-top mb-5">
           <div class="container-fluid">
@@ -89,324 +89,366 @@
         </nav>
         <!-- NAVBAR -->
 
+    <!-- SEPARADOR -->
+    <div class="mb-5 mt-5 text-white">.</div>
+    <!-- SEPARADOR -->
+
     <!-- CONTENT -->
     <% result.forEach((book) => { %>
-    <div class="d-flex flex-row mt-5">
-      <div>
-        <div
-          id="grandFather"
-          class="p-5 me-5 mx-auto w-75 d-flex mt-5 p-3 mb-5 bg-white rounded shadow"
-        >
-          <!-- Image part -->
-          <div id="imageSide" class="me-5">
-            <img
-              src="<%= book.ImagePath %>"
-              alt=""
-              width="300"
-              class="shadow"
-            />
-          </div>
 
-          <!-- Information part -->
-          <div id="informationSide" class="ms-5">
-            <h3><strong><%= book.Title %></strong></h3>
-            <h5><%= book.Autor %></h5>
-            <p class="text-secondary">
-              <strong><%= book.PublishedYear %></strong>
-            </p>
-
-            <div
-              class="ms-4 mt-5 mb-5 d-flex flex-row justify-content-center align-items-center"
-            >
-              <% if( book.firstGenre !== "") { %>
-                <div class="bg-dark text-white p-2 rounded ms-2"><%= book.firstGenre %></div>
-              <% } %>  
-              <% if( book.secondGenre !== "") { %>
-                <div class="bg-dark text-white p-2 rounded ms-2"><%= book.secondGenre %></div>
-              <% } %>  
-              <% if( book.thirdGenre !== "") { %>
-                <div class="bg-dark text-white p-2 rounded ms-2"><%= book.thirdGenre %></div>
-              <% } %>  
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9">
+          <!-- Primera parte -->
+          <div class="bg-white p-5 d-flex align-items-start border-end border-disable border-1">
+            <!-- IMAGE -->
+            <div class="w-25 d-flex align-items-center justify-content-center border border-1 border-danger me-5">
+              <img src="<%= book.ImagePath %>" alt="" class="w-100 shadow">
             </div>
+            <!-- IMAGE -->
+            <!-- INFORMATION SIDE -->
+            <div class="w-100 d-flex flex-column justify-content-center">
+              <h3><strong><%= book.Title %> </strong></h3>
+              <p class="text-secondary">
+                <strong><%= book.PublishedYear %></strong>
+              </p>
+              <div class="ms-4 mt-5 mb-5 d-flex flex-row justify-content-center align-items-center">
+                <% if( book.firstGenre !== "") { %>
+                  <div class="bg-dark text-white p-2 rounded ms-2"><%= book.firstGenre %></div>
+                <% } %>  
+                <% if( book.secondGenre !== "") { %>
+                  <div class="bg-dark text-white p-2 rounded ms-2"><%= book.secondGenre %></div>
+                <% } %>  
+                <% if( book.thirdGenre !== "") { %>
+                  <div class="bg-dark text-white p-2 rounded ms-2"><%= book.thirdGenre %></div>
+                <% } %>  
+              </div>
+              <strong class="h5 mb-2">Resumen de <%= book.Title  %> </strong>
+              <p id="description" style="white-space: pre-line; font-family: 'Times New Roman', Times, serif;" class="h5 mt-2">
+                -<%= book.Description.replace(/\./g, ".\n") %>
+              </p>
+            </div>
+            <!-- INFORMATION SIDE -->
 
-            <strong class="h5 mb-2">Resumen de <%= book.Title  %> </strong>
-            <p id="description" style="white-space: pre-line; font-family: 'Times New Roman', Times, serif;" class="h5 mt-2">
-              -<%= book.Description.replace(/\./g, ".\n") %>
-            </p>
+            <!-- FICHA TECNICA -->
+            <!-- FICHA TECNICA -->
           </div>
         </div>
-        <div
-          class="p-5 mx-auto w-75 d-flex flex-column mt-5 shadow p-3 mb-5 bg-white rounded me-5"
-        >
-          <h4 class="text-secondary">Ficha tecnica</h4>
-          <div
-            class="d-flex flex-row justify-content-around align-items-center"
-          >
+        <div class="col-sm-3">
+          <!-- Segunda parte -->
+          <div class="bg-white p-5">
             <div>
-              <strong>Paginas</strong>
-              <p><%= book.bookPages %> </p>
-              <strong>Stock en venta</strong>
-              <p><%= book.Stock %></p>
-              <input
-                type="text"
-                hidden
-                value="<%= book.Stock %>"
-                id="inputBookStock"
-              />
-              <strong>Idioma</strong>
-              <p><%= book.bookLanguages%> </p> 
+              <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "black" %>  me-4">$<%= book.Price %></p>
+              <p class="w-100 <%= book.Stock <= 5 && book.Stock > 1 ? "text-success" : "text-decoration-line-through" %> ">
+                <i class="fa fa-solid fa-truck"></i><%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS! " : "¡ENVÍO GRATIS! " %>
+              </p>
             </div>
+            <!-- BOTON DE COMPRA -->
             <div>
-              <strong>Autor</strong>
-              <p><%= book.Autor %></p>
-              <strong>Editorial</strong>
-              <p>LIBROS DEL ASTEROIDE</p>
-              <strong>Año de publicacion</strong>
-              <p><%= book.PublishedYear %></p>
+              <% if (book.Stock !== 0 && session.Role !== "Admin") { %>
+                <button
+                  class="mx-aut border-0 text-white rounded p-2 mt-2 h5"
+                  id="btnComprar"
+                  onclick="document.getElementById('myModal').style.display='block'"
+                >
+                  Comprar
+                </button>
+                <% } else if ( session.Role === "Admin") { %>
+                  <button
+                  class="mx-aut w-100 bg-disable border-0 text-white rounded p-2 mt-2 h5"
+                  id=""
+                  >
+                    Comprar
+                  </button>
+                <% } else {%>
+                <button
+                  class="mx-auto border-0 text-white rounded p-2 mt-2 h5"
+                  style="width: 200px"
+                  id="btnComprarDisabled"
+                  onclick="document.getElementById('myModal').style.display='block'"
+                  disabled
+                >
+                  Agotado
+                </button>
+                <% } %>
             </div>
-            <div>
-              <strong>Encuardernacion</strong>
-              <p><%= book.PublishedYear < 2000 ? "Tapa blanda" : "Tapa gruesa" %> </p>
-              <% if( book.firstGenre !== "") { %>
-                <strong>Ficcion</strong>
-                <p><%= book.firstGenre %> </p>
-              <% } %>  
-              <% if( book.secondGenre !== "") { %>
-                <strong>No Ficcion</strong>
-                <p><%= book.secondGenre %> </p>
-              <% } %>  
-              <% if( book.thirdGenre !== "") { %>
-                <strong>Comic y Manga</strong>
-                <p><%= book.thirdGenre %> </p>
-              <% } %>  
-            </div>
-          </div>
-          <hr>
-          <div>
-            <h4 class="text-secondary">Comments section</h4>
-            <button id="toggle-form" class="btn btn-primary mb-3">Añadir comentario</button>
-            <!-- Formulario oculto por defecto -->
-            <form id="comment-form" action="/SaveComment" method="post" class="d-none">
-              <input type="text" hidden value="<%=book.bookID%>" name="bookIdComment">
-              <section class="mb-3">
-                <div class="container text-dark">
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="d-flex flex-start w-100">
-                            <img class="rounded-circle shadow-1-strong me-3"
-                              src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
-                              height="65" />
-                            <div class="w-100">
-                              <h5>Agrega un comentario ya!</h5>
-                              <div class="form-outline">
-                                <textarea class="form-control" name="commentText" id="textAreaExample" rows="4"></textarea>
-                                <label class="form-label" for="textAreaExample">Cual es tu punto de vista?</label>
-                              </div>
-                              <div class="d-flex justify-content-between mt-3">
-                                <button type="submit" class="btn btn-danger">
-                                  Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+            <!-- BOTON DE AGREGAR AL CARRITO -->
+            <form action="/AddToCar" method="post">
+              <!-- informaciones necesarias para el carrito -->
+              <input type="text" hidden value="<%= book.bookID %>" name="bookIdCar">
+              <input type="text" hidden value="<%= book.Title %>" name="bookTitleCar">
+              <input type="text" hidden value="<%= book.ImagePath %>" name="imagePathCar">
+              <input type="text" hidden value="<%= book.Price %>" name="bookPriceCar">
+              <!-- informaciones necesarias para el carrito -->
+              <div class="mt-2 mb-2 d-flex flex-row justify-content-center align-items-center">
+                <button type="submit" class="btn btn-outline-success" data-mdb-ripple-color="dark">Añadir a la cesta</button>
+              </div>
             </form>
-            <!-- Listado de comentarios -->
-            <!-- Contenedor de los primeros 5 comentarios -->
-            <div id="first-comments">
-              <% comments.slice(0, 2).forEach((item) => { %>
-                <!-- Código de un comentario -->
-                <div class="d-flex flex-start mb-4">
-                  <img class="rounded-circle me-3 border border-1 border-disable"
-                    src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
-                    height="65" />
-                  <div class="card w-100 border-disable">
-                    <div class="card-body p-4">
-                      <div class="">
-                        <h5><%= item.userFullName %></h5>
-                        <p class="small"><%= item.commentDate %></p>
-                        <p>
-                          <%= item.commentText %>
-                        </p>
-        
-                        <div class="d-flex justify-content-between align-items-center">
-                          <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
-                          <div class="d-flex align-items-center">
-                            <form action="/LikeComment" method="post">
-                              <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
-                              <input type="text" hidden value="<%= item.commentID %>" name="commentId">
-                              <button type="submit" class="me-2 btn-outline border-0 bg-white text-success"><i class="fas fa-thumbs-up me-1"></i><%= item.totalLikes %></button>
-                            </form>
-                            <form action="/DisLikeComment" method="post">
-                              <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
-                              <input type="text" hidden value="<%= item.commentID %>" name="commentId">
-                              <button type="submit" class="me-2 btn-outline border-0 bg-white text-danger"><i class="fas fa-thumbs-down me-1"></i><%= item.totalDisLikes %></button>
-                            </form>
-                          </div>
-                          <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
-                          <!-- <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i> Reply</a> -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% }) %>
+            <!-- INCREIBLES OFERTAS -->
+            <h6 class="p-2 text-center text-white fw-bold" style="background-color: #004D43;">
+              <i class="fa fa-solid fa-gift"></i> Recibe increibles ofertas! 
+            </h6>
+            <!-- GUARDAR COMO FAVORITOS -->
+            <div class="d-flex flex-row align-items-center mt-5">
+              <form action="/SaveFavorites" method="post">
+                <input
+                  type="text"
+                  hidden
+                  name="bookId"
+                  id="bookId"
+                  value="<%= book.bookID %>"
+                />
+                <button class="bg-white btn-outline border-0 <%= favoriteChecked === false ? "text-black" : "text-danger" %>">
+                  <i class="fa fa-regular fa-heart me-1 <%= favoriteChecked === false ? "text-black" : "text-danger" %>"></i>
+                  GUARDAR
+                </button>
+              </form>
+              <button class="bg-white text-black btn-outline border-0">
+                <i class="fa fa-solid fa-copy me-1"></i>
+                COPIAR
+              </button>
             </div>
-            
-
-            <!-- Contenedor de los restantes comentarios -->
-            <div id="remaining-comments" style="display: none;">
-              <% comments.slice(2).forEach((item) => { %>
-                <!-- Código de un comentario -->
-                <div class="d-flex flex-start mb-4">
-                  <img class="rounded-circle me-3 border border-1 border-disable"
-                    src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
-                    height="65" />
-                  <div class="card w-100">
-                    <div class="card-body p-4">
-                      <div class="">
-                        <h5><%= item.userFullName %></h5>
-                        <p class="small"><%= item.commentDate %></p>
-                        <p>
-                          <%= item.commentText %>
-                        </p>
-        
-                        <div class="d-flex justify-content-between align-items-center">
-                          <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
-                          <div class="d-flex align-items-center">
-                            <form action="/LikeComment" method="post">
-                              <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
-                              <input type="text" hidden value="<%= item.commentID %>" name="commentId">
-                              <button type="submit" class="me-2 btn-outline border-0 bg-white text-success"><i class="fas fa-thumbs-up me-1"></i><%= item.totalLikes %></button>
-                            </form>
-                            <form action="/DisLikeComment" method="post">
-                              <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
-                              <input type="text" hidden value="<%= item.commentID %>" name="commentId">
-                              <button type="submit" class="me-2 btn-outline border-0 bg-white text-danger"><i class="fas fa-thumbs-down me-1"></i><%= item.totalDisLikes %></button>
-                            </form>
-                          </div>
-                          <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% }) %>
+            <!-- GUARDAR COMO FAVORITOS -->
+            <!-- ELIMINAR Y EDITAR -->
+            <div class="mt-5 d-flex flex-row align-items-center justify-content-around">
+              <% if ( session.Role === "Admin") { %>
+                <form action="/EditBook" method="post">
+                  <input
+                    type="text"
+                    hidden
+                    name="bookId"
+                    id="bookId"
+                    value="<%= book.bookID %>"
+                  />
+                  <button class=" p-2 rounded border bg-primary text-white">
+                    <i class="fa fa-solid fa-marker"></i>
+                    Editar
+                  </button>
+                </form>
+                <form action="/DeleteBook" method="post">
+                  <input
+                    type="text"
+                    hidden
+                    name="bookId"
+                    id="bookId"
+                    value="<%= book.bookID %>"
+                  />
+                  <button class="bg p-2 rounded border bg-danger text-white">
+                    <i class="fa fa-sharp fa-solid fa-trash"></i>
+                    Eliminar
+                  </button>
+                </form>
+              <% } %>
             </div>
-            <a id="load-more" class="mt-3">Cargar más comentarios</a>
-            <a id="hideCommentsBtn" class="pointer" style="display: none;">Ocultar comentarios</a>
-            <!-- Listado de comentarios -->
           </div>
         </div>
       </div>
-      <div
-        class="p-4 me-5 mx-auto d-flex flex-column mt-5 bg-white align-self-start"
-      >
-        <div class="d-flex justify-content-end align-items-end">
-          <p class="h2 text-<%= book.Stock <= 5 && book.Stock <= 1 ? "dark text-decoration-line-through" : "black" %>  me-4">$<%= book.Price %></p>
-          <p class="w-100 <%= book.Stock <= 5 && book.Stock > 1 ? "text-success" : "text-decoration-line-through" %> ">
-            <i class="fa fa-solid fa-truck"></i><%= book.Stock <= 5 && book.Stock > 1 ? "¡ENVÍO GRATIS! " : "¡ENVÍO GRATIS! " %>
+      
+      <div class="position-relative mt-5 mb-5">
+        <hr class="border-top border-secondary mt-n2">
+        <span class="position-absolute top-0 start-50 translate-middle bg-white px-4 fs-4" style="font-family: 'Source Serif Pro';">Informacion Extra</span>
+      </div>
+      
+
+      <div class="d-flex flex-row justify-content-between">
+          <!-- SINOPSIS -->
+        <div class="bg-white p-3 w-50 me-4">
+          <h4 class="fs-5 text-secondary">SINOPSIS</h4>
+          <p id="description" class="">
+            -<%= book.Description.replace(/\./g, ".\n").substr(0, 500) %>...
           </p>
         </div>
-        <% if (book.Stock !== 0 && session.Role !== "Admin") { %>
-        <button
-          class="mx-aut border-0 text-white rounded p-2 mt-2 h5"
-          id="btnComprar"
-          onclick="document.getElementById('myModal').style.display='block'"
-        >
-          Comprar
-        </button>
-        <% } else if ( session.Role === "Admin") { %>
-          <button
-          class="mx-aut w-100 bg-disable border-0 text-white rounded p-2 mt-2 h5"
-          id=""
-          >
-            Comprar
-          </button>
-        <% } else {%>
-        <button
-          class="mx-auto border-0 text-white rounded p-2 mt-2 h5"
-          style="width: 200px"
-          id="btnComprarDisabled"
-          onclick="document.getElementById('myModal').style.display='block'"
-          disabled
-        >
-          Agotado
-        </button>
-        <% } %>
-        <form action="/AddToCar" method="post">
-          <!-- informaciones necesarias para el carrito -->
-          <input type="text" hidden value="<%= book.bookID %>" name="bookIdCar">
-          <input type="text" hidden value="<%= book.Title %>" name="bookTitleCar">
-          <input type="text" hidden value="<%= book.ImagePath %>" name="imagePathCar">
-          <input type="text" hidden value="<%= book.Price %>" name="bookPriceCar">
-          <!-- informaciones necesarias para el carrito -->
-          <div class="mt-2 mb-2 d-flex flex-row justify-content-center align-items-center">
-            <button type="submit" class="btn btn-outline-success" data-mdb-ripple-color="dark">Añadir a la cesta</button>
-          </div>
-        </form>
-        <h6 class="p-2 text-center text-white fw-bold" style="background-color: #004D43;">
-          <i class="fa fa-solid fa-gift"></i> Recibe increibles ofertas! 
-        </h6>
-        <div class="d-flex justify-content-around align-items-center mt-5 mb-5">
-          <form action="/SaveFavorites" method="post">
-            <input
-              type="text"
-              hidden
-              name="bookId"
-              id="bookId"
-              value="<%= book.bookID %>"
-            />
-            <button class="bg-white text-black btn-outline border-0">
-              <i class="fa fa-regular fa-heart me-1 <%= favoriteChecked === false ? "text-black" : "text-danger" %> "></i>
-              GUARDAR
-            </button>
-          </form>
-          <button class="bg-white text-black btn-outline border-0">
-            <i class="fa fa-solid fa-copy me-1"></i>
-            Copy link
-          </button>
-        </div>
-        <div class="d-flex mt-1 justify-content-center align-items-center">
-          <% if ( session.Role === "Admin") { %>
-            <form action="/EditBook" method="post">
-              <input
-                type="text"
-                hidden
-                name="bookId"
-                id="bookId"
-                value="<%= book.bookID %>"
-              />
-              <button class=" p-2 rounded border bg-primary text-white">
-                <i class="fa fa-solid fa-marker"></i>
-                Editar
-              </button>
-            </form>
-            <form action="/DeleteBook" method="post">
-              <input
-                type="text"
-                hidden
-                name="bookId"
-                id="bookId"
-                value="<%= book.bookID %>"
-              />
-              <button class="bg p-2 rounded border bg-danger text-white">
-                <i class="fa fa-sharp fa-solid fa-trash"></i>
-                Eliminar
-              </button>
-            </form>
-          <% } %>
-        </div>
-      </div>
-    </div>
+        <!-- SINOPSIS -->
 
+        <!-- FICHA TECNICA -->
+        <div class=" bg-white w-50 border-start border-disable border-1">
+          <div class="ms-5">
+              <h4 class="text-secondary">Ficha tecnica</h4>
+            <div class="d-flex flex-row justify-content-around align-items-center">
+              <div>
+                <strong>Paginas</strong>
+                <p><%= book.bookPages %> </p>
+                <strong>Stock en venta</strong>
+                <p><%= book.Stock %></p>
+                <input
+                  type="text"
+                  hidden
+                  value="<%= book.Stock %>"
+                  id="inputBookStock"
+                />
+                <strong>Idioma</strong>
+                <p><%= book.bookLanguages%> </p> 
+              </div>
+              <div>
+                <strong>Autor</strong>
+                <p><%= book.Autor %></p>
+                <strong>Encuardernacion</strong>
+                <p><%= book.PublishedYear < 2000 ? "Tapa blanda" : "Tapa gruesa" %> </p>
+                <strong>Año de publicacion</strong>
+                <p><%= book.PublishedYear %></p>
+              </div>
+              <div>
+                <% if( book.firstGenre !== "") { %>
+                  <strong>Ficcion</strong>
+                  <p><%= book.firstGenre %> </p>
+                <% } %>  
+                <% if( book.secondGenre !== "") { %>
+                  <strong>No Ficcion</strong>
+                  <p><%= book.secondGenre %> </p>
+                <% } %>  
+                <% if( book.thirdGenre !== "") { %>
+                  <strong>Comic y Manga</strong>
+                  <p><%= book.thirdGenre %> </p>
+                <% } %>  
+              </div>
+            
+            </div>
+          </div>
+        </div>
+        <!-- FICHA TECNICA -->
+      </div>
+
+      <div class="position-relative mt-5 mb-5">
+        <hr class="border-top border-secondary mt-n2">
+        <span class="position-absolute top-0 start-50 translate-middle bg-white px-4 fs-4" style="font-family: 'Source Serif Pro';">Opiniones sobre <%= book.Title %> </span>
+      </div>
+
+      <div class="d-flex justify-content-center flex-column align-items-center w-100">
+        <button id="toggle-form" class="btn btn-primary mb-3 w-25">Añadir comentario</button>
+        <!-- Formulario oculto por defecto -->
+        <form id="comment-form" action="/SaveComment" method="post" class="d-none w-75">
+          <input type="text" hidden value="<%=book.bookID%>" name="bookIdComment">
+          <section class="mb-3">
+            <div class="container text-dark">
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex flex-start w-100">
+                        <img class="rounded-circle shadow-1-strong me-3"
+                          src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
+                          height="65" />
+                        <div class="w-100">
+                          <h5>Agrega un comentario ya!</h5>
+                          <div class="form-outline">
+                            <textarea class="form-control" name="commentText" id="textAreaExample" rows="4"></textarea>
+                            <label class="form-label" for="textAreaExample">Cual es tu punto de vista?</label>
+                          </div>
+                          <div class="d-flex justify-content-between mt-3">
+                            <button type="submit" class="btn btn-danger">
+                              Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </form>
+        <!-- FORMULARIO OCULTO POR DEFECTO -->
+
+        <!-- LISTA DE COMENTARIOS -->
+        <div id="first-comments" class="w-100">
+          <% comments.slice(0, 2).forEach((item) => { %>
+            <!-- Código de un comentario -->
+            <div class="d-flex flex-start mb-4">
+              <!-- <img class="rounded-circle me-3 border border-1 border-disable"
+                src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
+                height="65" /> -->
+              <div class="card w-100 border-disable">
+                <div class="card-body p-4">
+                  <div class="d-flex flex-row justify-content-between align-items-start">
+                    <div>
+                      <h5><%= item.userFullName %></h5>
+                      <p class="small"><%= item.commentDate %></p>
+                    </div>
+                    <div class="w-100 d-flex flex-row justify-content-start">
+                      <p>
+                        <%= item.commentText %>
+                      </p>
+                    </div>
+    
+                    <div class="d-flex justify-content-between align-items-center">
+                      <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
+                      <div class="d-flex align-items-center">
+                        <form action="/LikeComment" method="post">
+                          <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
+                          <input type="text" hidden value="<%= item.commentID %>" name="commentId">
+                          <button type="submit" class="me-2 btn-outline border-0 bg-white text-success"><i class="fas fa-thumbs-up me-1"></i><%= item.totalLikes %></button>
+                        </form>
+                        <form action="/DisLikeComment" method="post">
+                          <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
+                          <input type="text" hidden value="<%= item.commentID %>" name="commentId">
+                          <button type="submit" class="me-2 btn-outline border-0 bg-white text-danger"><i class="fas fa-thumbs-down me-1"></i><%= item.totalDisLikes %></button>
+                        </form>
+                      </div>
+                      <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
+                      <!-- <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i> Reply</a> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+
+        <!-- Contenedor de los restantes comentarios -->
+        <div id="remaining-comments" class="w-100" style="display: none;">
+          <% comments.slice(2).forEach((item) => { %>
+            <!-- Código de un comentario -->
+            <div class="d-flex flex-start mb-4">
+              <!-- <img class="rounded-circle me-3 border border-1 border-disable"
+                src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="avatar" width="65"
+                height="65" /> -->
+                <div class="card w-100 border-disable">
+                  <div class="card-body p-4">
+                    <div class="d-flex flex-row justify-content-between align-items-start">
+                      <div>
+                        <h5><%= item.userFullName %></h5>
+                        <p class="small"><%= item.commentDate %></p>
+                      </div>
+                      <div class="w-100 d-flex flex-row justify-content-start">
+                        <p>
+                          <%= item.commentText %>
+                        </p>
+                      </div>
+      
+                      <div class="d-flex justify-content-between align-items-center">
+                        <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
+                        <div class="d-flex align-items-center">
+                          <form action="/LikeComment" method="post">
+                            <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
+                            <input type="text" hidden value="<%= item.commentID %>" name="commentId">
+                            <button type="submit" class="me-2 btn-outline border-0 bg-white text-success"><i class="fas fa-thumbs-up me-1"></i><%= item.totalLikes %></button>
+                          </form>
+                          <form action="/DisLikeComment" method="post">
+                            <input type="text" hidden value="<%= book.bookID %>" name="commnetBookId">
+                            <input type="text" hidden value="<%= item.commentID %>" name="commentId">
+                            <button type="submit" class="me-2 btn-outline border-0 bg-white text-danger"><i class="fas fa-thumbs-down me-1"></i><%= item.totalDisLikes %></button>
+                          </form>
+                        </div>
+                        <!-- SECCION Y FUNCIONAMIENTO DE LIKES -->
+                        <!-- <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i> Reply</a> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          <% }) %>
+        </div>
+
+        <% if ( comments.length !== 0 && comments.length > 2 ) { %>
+          <a id="load-more" style="background-color: #D9017A;" class="btn w-100 text-white">Cargar más comentarios</a>
+          <a id="hideCommentsBtn" class="btn btn-primary w-100 text-white" style="display: none; background-color: #D9017A;">Ocultar comentarios</a>
+        <% } %>  
+        <!-- LISTA DE COMENTARIOS -->
+      </div>
+      
+    </div>
+    
     <!-- Modal  PARA COMPRAR-->
     <div id="myModal" class="modal">
       <!-- Modal contenido -->

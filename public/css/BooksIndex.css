@@ -4,7 +4,7 @@
   /* border: 1px solid #3c3c3c; */
   display: flex;
   justify-content: start;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
   padding: 20px;
   background-color: white;
@@ -31,7 +31,7 @@
 }
 
 #elPapa {
-  width: 19%;
+  width: 16%;
 }
 
 #sidebarMenu {

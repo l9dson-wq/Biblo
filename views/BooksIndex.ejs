@@ -131,14 +131,12 @@
             </div>
             <!-- Mensaje de stock no encontrado -->
             <% }else { %>
-            <!-- LIST OF BOOKS -->
-            <div class="album py-3">
-              <div class="container">
-                <div class="row">
+              <div class="ms-5 album mb-5">
+                <div class="row ms-5 row-cols-6">
                   <% booksList.forEach((book) => {%>
-                  <div class="col-md-5" id="elPapa" style="border: 1px solid #d0d0d0;">
+                  <div class="col" id="elPapa" style="border: 1px solid #d0d0d0;">
                     <div 
-                      class="mx-auto w-100"
+                      class=""
                       id="grandFather"
                       style="background-color: #FFFFFF"
                     >
@@ -152,13 +150,13 @@
                         </a>
                       </div>
                       <!-- image -->
-
+              
                       <!-- cap type -->
                       <div id="capType" class="w-100">
                         <p><%= book.PublishedYear > 2000 ? "Tapa Dura" : "Tapa Blanda" %></p>
                       </div>
                       <!-- cap type -->
-
+              
                       <!-- INFORMATION -->
                       <div id="informationSide" class="w-100 d-flex flex-column justify-content-start align-items-start">
                         <p class="fw-bold" id="bookTitleStyle"><%= book.Title %></p>
@@ -180,8 +178,7 @@
                   </div>
                   <% }) %>
                 </div>
-              </div>
-            </div>
+              </div>              
             <!-- LIST OF BOOKS -->
             <% } %>
         </div>
