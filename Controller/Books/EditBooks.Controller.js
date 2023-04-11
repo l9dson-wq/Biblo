@@ -17,6 +17,8 @@ const getBookInformation = async (req, res) => {
     return res.render("EditBook", {
       book: result[0],
       session: req.session,
+      message: "",
+      nameSearched: undefined,  
     });
   } catch (error) {
     console.log(error);

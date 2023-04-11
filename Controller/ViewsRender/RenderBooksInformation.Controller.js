@@ -40,6 +40,8 @@ const RenderBooksInformation = async (req, res) => {
     favoriteChecked: resultFavorite,
     comments: bookComments,
     totalNoti: totalBooks,
+    message: "",
+    nameSearched: undefined,
   });
 };
 

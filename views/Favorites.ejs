@@ -59,14 +59,41 @@
             <% } %>
           </ul>
         </div>
+        <!-- Buscar por titulo de libro -->
+        <form
+        class="d-flex input-group w-25"
+        method="post"
+        action="/BooksIndex">
+          <input name="searchName" type="text" class="me-3 form-control rounded"
+          placeholder="Buscar" width="200" value="<%= nameSearched !== "" ?
+          nameSearched : "" %>" />
+          <button type="submit" class="border-0 rounded-circle p-1 bg-white">
+            <span class="p-2" id="search-addon">
+              <i class="fa fa-search"></i>
+            </span>
+          </button>
+        </form>
+        <!-- Buscar por titulo de libro -->
         <div class="w-25 d-flex justify-content-end align-items-center">
           <div class="d-flex justify-content-end align-items-center">
-            <a href="/Cesta" class="me-1 d-flex justify-content-center align-items-center">
-              <p class="text-white">
-                <i class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"></i>
-                <span class="badge badge-danger bg-danger badge-pill position-absolute" style="top: 30px; right: 230px; border-radius: 50%;"><%= totalNoti %> </span>
-              </p>
-            </a>
+            <% if( session.Role !== "Admin") { %>
+              <a
+              href="/Cesta"
+              class="me-1 d-flex justify-content-center align-items-center"
+              >
+                <p class="text-white">
+                  <i
+                    class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"
+                    ></i
+                  >
+                  <span
+                    class="badge badge-danger bg-danger badge-pill position-absolute"
+                    style="top: 30px; right: 230px; border-radius: 50%"
+                    ><%= totalNoti %>
+                  </span>
+                </p>
+              </a>
+            <% } %>
             <p class="text-white m-3 ms-5">
               <%= session.Name + " " + session.LastName %>
             </p>

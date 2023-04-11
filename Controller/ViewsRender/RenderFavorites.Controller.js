@@ -33,6 +33,8 @@ const RenderFavorites = async (req, res) => {
     booksName: result.booksName,
     imageLocations: result.imageLocations,
     totalNoti: totalBooks,
+    message: "",
+    nameSearched: undefined,
   });
 };
 

@@ -21,7 +21,13 @@ const RenderHome = async (req, res) => {
     //REDONDEO EL NUMERO A SOLO DOS DECIMALES DESPUES DEL PUNTO
     totalPrice = parseFloat(totalPrice.toFixed(2));
 
-    res.render('Home', { session: req.session, totalNoti: totalBooks, });
+    res.render('Home', 
+    { 
+      session: req.session, 
+      totalNoti: totalBooks,
+      message: "",
+      nameSearched: undefined,  
+    });
 };
 
 module.exports = { RenderHome, };

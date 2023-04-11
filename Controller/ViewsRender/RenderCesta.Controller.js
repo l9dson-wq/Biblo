@@ -29,6 +29,8 @@ const RenderCesta = async (req, res) => {
     allShoppingCar: totalShoppingCar,
     subtotal: totalPrice,
     totalBooks: totalBooks,
+    message: "",
+    nameSearched: undefined,
   });
 };
 
