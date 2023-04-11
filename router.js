@@ -24,6 +24,7 @@ const LikeCommentController = require("./Controller/comments/likesComments.Contr
 const ActivateUserByAdminController = require("./Controller/User/ActivateAccountAdmin.Controller");
 const shoppingCarController = require("./Controller/Books/ShoppingCar.Controller");
 const RenderCestaController = require("./Controller/ViewsRender/RenderCesta.Controller");
+const removeShoppingCarController = require("./Controller/Books/RemoveShoppingCar.Controller");
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -93,5 +94,7 @@ router.post('/ActivateUser', isAuthenticatedController.isAuthenticated, Activate
 //Agregar a la cesta
 router.post('/AddToCar', isAuthenticatedController.isAuthenticated, shoppingCarController.shoppingCar );
 router.get('/Cesta', isAuthenticatedController.isAuthenticated, RenderCestaController.RenderCesta )
+//remover de la cesta
+router.post('/RemoveFromCar', isAuthenticatedController.isAuthenticated, removeShoppingCarController.removeShoppingCar);
 
 module.exports = router;

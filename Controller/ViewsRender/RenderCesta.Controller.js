@@ -7,25 +7,28 @@ const RenderCesta = async (req, res) => {
   let userID = req.session.userId;
 
   let totalShoppingCar = await getAllShoppingCarModel.getAllShoppingCar(userID);
-  let totalShoppingCarNumber = Number(totalShoppingCar.length);
+  let totalShoppingCarNumber;
   console.log(totalShoppingCar);
 
   let totalPrice = 0;
-  let numeroLimitado;
+  let totalBooks = 0;
 
-  for( let i = 0; i < totalShoppingCar.length; i++ ){
+  //SUMO EL PRECIO TOTAL DE TODOS LOS LIBROS Y EL TOTAL DE LAS UNIDADES
+  for (let i = 0; i < totalShoppingCar.length; i++) {
     totalPrice += totalShoppingCar[i].totalPrice;
+    totalBooks += Number(totalShoppingCar[i].bookAmount);
   }
-
- totalPrice = parseFloat(totalPrice.toFixed(2));
+  //REDONDEO EL NUMERO A SOLO DOS DECIMALES DESPUES DEL PUNTO
+  totalPrice = parseFloat(totalPrice.toFixed(2));
 
   console.log(totalPrice);
 
   res.render("Cesta", {
     session: req.session,
-    totalNoti: totalShoppingCarNumber,
+    totalNoti: totalBooks,
     allShoppingCar: totalShoppingCar,
     subtotal: totalPrice,
+    totalBooks: totalBooks,
   });
 };
 

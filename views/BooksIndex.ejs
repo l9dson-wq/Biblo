@@ -17,7 +17,7 @@
     ></script>
     <link rel="stylesheet" href="/css/BooksIndex.css" />
   </head>
-  <body class="bg-white">
+  <body style="background-color: #FFFFFF">
     <!-- NAVBAR -->
     <nav class="navbar navbar-black bg-black shadow-lg fixed-top">
       <div class="container-fluid">
@@ -43,9 +43,7 @@
               >
             </li>
             <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/Cesta"
-                >Cesta</a
-              >
+              <a class="nav-link active text-white" href="/Cesta">Cesta</a>
             </li>
             <% if( session.Role === "Admin") { %>
             <li class="nav-item m-2">
@@ -65,14 +63,9 @@
           method="post"
           action="/BooksIndex"
         >
-          <input
-            name="searchName"
-            type="text"
-            class="me-3 form-control rounded"
-            placeholder="Buscar"
-            width="200"
-            value="<%= nameSearched !== "" ? nameSearched : "" %>"
-          />
+          <input name="searchName" type="text" class="me-3 form-control rounded"
+          placeholder="Buscar" width="200" value="<%= nameSearched !== "" ?
+          nameSearched : "" %>" />
           <button type="submit" class="border-0 rounded-circle p-1 bg-white">
             <span class="p-2" id="search-addon">
               <i class="fa fa-search"></i>
@@ -82,10 +75,20 @@
         <!-- Buscar por titulo de libro -->
         <div class="w-25 d-flex justify-content-end align-items-center">
           <div class="d-flex justify-content-end align-items-center">
-            <a href="/Cesta" class="me-1 d-flex justify-content-center align-items-center">
+            <a
+              href="/Cesta"
+              class="me-1 d-flex justify-content-center align-items-center"
+            >
               <p class="text-white">
-                <i class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"></i>
-                <span class="badge badge-danger bg-danger badge-pill position-absolute" style="top: 30px; right: 230px; border-radius: 50%;"><%= totalNoti %> </span>
+                <i
+                  class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"
+                  ></i
+                >
+                <span
+                  class="badge badge-danger bg-danger badge-pill position-absolute"
+                  style="top: 30px; right: 230px; border-radius: 50%"
+                  ><%= totalNoti %>
+                </span>
               </p>
             </a>
             <p class="text-white m-3 ms-5">
@@ -104,99 +107,92 @@
     </nav>
     <!-- NAVBAR -->
 
-    <div class="row" style="width: 190vh; margin-top: 5%;">
-      <div class="col-md-9">
-        <!-- DIV PADRE -->
-        <div class="">
-          <div class="">
-            <div class="col-sm-9" style="width: 1300px">
-              <div class="contenido-principal">
-                <!-- Aquí va el contenido principal -->
-                <% if ( message !== "") { %>
-                <!-- Mensaje de stock no encontrado -->
-                <div
-                  class="card mx-auto text-white bg-danger mb-3 mt-5"
-                  style="max-width: 18rem"
-                >
-                  <div class="card-header">Libros no encontrados</div>
-                  <div class="card-body">
-                    <h5 class="card-title">No se encontro stock</h5>
-                    <p class="card-text"><%= message %></p>
-                  </div>
-                </div>
-                <!-- Mensaje de stock no encontrado -->
-                <% }else { %>
-                <!-- LIST OF BOOKS -->
-                <div class="album py-3">
-                  <div class="container">
-                    <div class="row">
-                      <% booksList.forEach((book) => {%>
-                      <div class="col-md-5 border border-1 border-disable" id="elPapa">
-                        <div 
-                          class="mx-auto w-100 bg-white"
-                          id="grandFather"
-                        >
-                          <!-- image -->
-                          <div class="w-100 d-flex justify-content-center align-items-center">
-                            <a
-                              href="/BooksInformation?bookID=<%= book.bookID %>"
-                              class="d-flex justify-content-center align-items-center"
-                            >
-                              <img
-                                id="imageBook"
-                                class="shadow-lg img-fluid aspect-ratio-4x3"
-                                src="<%= book.ImagePath %>"
-                                alt=""
-                              />
-                            </a>
-                          </div>
-                          <!-- image -->
+    <!-- SEPARADOR -->
+    <div class="mt-5 mb-5">.</div>
+    <!-- SEPARADOR -->
 
-                          <!-- cap type -->
-                          <div id="capType" class="w-100">
-                            <p><%= book.PublishedYear > 2000 ? "Tapa Dura" : "Tapa Blanda" %></p>
-                          </div>
-                          <!-- cap type -->
-
-                          <!-- INFORMATION -->
-                          <div id="informationSide" class="w-100 d-flex flex-column justify-content-start align-items-start">
-                            <p class="fw-bold" id="bookTitleStyle"><%= book.Title %></p>
-                            <p class="text-secondary"><%= book.Autor %></p>
-                            <p></p>
-                            <p
-                              class="fw-bold text-<%= book.Stock == 0 ? 'danger' : `danger fs-4` %>"
-                            >
-                              <%= book.Stock == 0 ? "Temporalmente no disponible" : "$" + book.Price.toFixed(2) %>
-                            </p>
-                            <p class="text-success fw-medium" id="envioGratis">
-                              <% if ( book.Stock <= 5 && book.Stock > 1 ) {%>
-                                ¡ENVÍO GRATIS! <i class="fa fa-solid fa-truck"></i>
-                              <% } else { "" } %>  
-                            </p>
-                          </div>
-                          <!-- INFORMATION -->
-                        </div>
-                      </div>
-                      <% }) %>
-                    </div>
-                  </div>
-                </div>
-                <!-- LIST OF BOOKS -->
-                <% } %>
+    <!-- CONTENIDO -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-10">
+          <!-- Primera parte -->
+          <!-- Aquí va el contenido principal -->
+          <% if ( message !== "") { %>
+            <!-- Mensaje de stock no encontrado -->
+            <div
+              class="card mx-auto text-white bg-danger mb-3 mt-5"
+              style="max-width: 18rem"
+            >
+              <div class="card-header">Libros no encontrados</div>
+              <div class="card-body">
+                <h5 class="card-title">No se encontro stock</h5>
+                <p class="card-text"><%= message %></p>
               </div>
             </div>
-          </div>
+            <!-- Mensaje de stock no encontrado -->
+            <% }else { %>
+            <!-- LIST OF BOOKS -->
+            <div class="album py-3">
+              <div class="container">
+                <div class="row">
+                  <% booksList.forEach((book) => {%>
+                  <div class="col-md-5" id="elPapa" style="border: 1px solid #d0d0d0;">
+                    <div 
+                      class="mx-auto w-100"
+                      id="grandFather"
+                      style="background-color: #FFFFFF"
+                    >
+                      <!-- image -->
+                      <div class="w-100 d-flex justify-content-center align-items-center">
+                        <a
+                          href="/BooksInformation?bookID=<%= book.bookID %>"
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <img
+                            id="imageBook"
+                            class="shadow-lg img-fluid aspect-ratio-4x3"
+                            src="<%= book.ImagePath %>"
+                            alt=""
+                          />
+                        </a>
+                      </div>
+                      <!-- image -->
+
+                      <!-- cap type -->
+                      <div id="capType" class="w-100">
+                        <p><%= book.PublishedYear > 2000 ? "Tapa Dura" : "Tapa Blanda" %></p>
+                      </div>
+                      <!-- cap type -->
+
+                      <!-- INFORMATION -->
+                      <div id="informationSide" class="w-100 d-flex flex-column justify-content-start align-items-start">
+                        <p class="fw-bold" id="bookTitleStyle"><%= book.Title %></p>
+                        <p class="text-secondary"><%= book.Autor %></p>
+                        <p></p>
+                        <p
+                          class="fw-bold text-<%= book.Stock == 0 ? 'danger' : `danger fs-4` %>"
+                        >
+                          <%= book.Stock == 0 ? "Temporalmente no disponible" : "$" + book.Price.toFixed(2) %>
+                        </p>
+                        <p class="text-success fw-medium" id="envioGratis">
+                          <% if ( book.Stock <= 5 && book.Stock > 1 ) {%>
+                            ¡ENVÍO GRATIS! <i class="fa fa-solid fa-truck"></i>
+                          <% } else { "" } %>  
+                        </p>
+                      </div>
+                      <!-- INFORMATION -->
+                    </div>
+                  </div>
+                  <% }) %>
+                </div>
+              </div>
+            </div>
+            <!-- LIST OF BOOKS -->
+            <% } %>
         </div>
-        <!-- DIV PADRE -->
-        <!-- Aquí va la lista de libros -->
-      </div>
-      <div class="col-md-2">
-        <!-- Aquí va el menú sidebar -->
-        <div class="" style="width: 100%">
-          <div
-            class="aside d-flex flex-column align-items-start justify-content-end mt-5 p-3 shadow-lg bg-white rounded"
-          >
-            <!-- Aquí va el contenido del aside -->
+        <div class="col-sm-2">
+          <!-- Segunda parte -->
+          <div class="w-100 bg-white p-4 border border-1 border-disable">
             <h3>Filtros:</h3>
             <!-- Default checkbox -->
             <form action="/BooksIndex" method="POST">
@@ -269,6 +265,7 @@
         </div>
       </div>
     </div>
+    <!-- CONTENIDO -->
 
     <button
       class="navbar-toggler"

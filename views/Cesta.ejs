@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-    crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
     />
     <script
-    src="https://kit.fontawesome.com/b55d7e5cd9.js"
-    crossorigin="anonymous"
+      src="https://kit.fontawesome.com/b55d7e5cd9.js"
+      crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="/css/Cesta.css">
+    <link rel="stylesheet" href="/css/Cesta.css" />
   </head>
-  <body style="background-color: #EAEDED;">
+  <body style="background-color: #eaeded">
     <!-- NAVBAR -->
     <nav class="navbar navbar-black bg-black fixed-top mb-5">
       <div class="container-fluid">
@@ -59,10 +59,20 @@
         </div>
         <div class="w-25 d-flex justify-content-end align-items-center">
           <div class="d-flex justify-content-end align-items-center">
-            <a href="/Cesta" class="me-1 d-flex justify-content-center align-items-center">
+            <a
+              href="/Cesta"
+              class="me-1 d-flex justify-content-center align-items-center"
+            >
               <p class="text-white">
-                <i class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"></i>
-                <span class="badge badge-danger bg-danger badge-pill position-absolute" style="top: 30px; right: 230px; border-radius: 50%;"><%= totalNoti %> </span>
+                <i
+                  class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"
+                  ></i
+                >
+                <span
+                  class="badge badge-danger bg-danger badge-pill position-absolute"
+                  style="top: 30px; right: 230px; border-radius: 50%"
+                  ><%= totalNoti %>
+                </span>
               </p>
             </a>
             <p class="text-white m-3 ms-5">
@@ -86,41 +96,84 @@
     <!-- SEPARADOR -->
 
     <!-- CONTENIDO PARA LA CESTA -->
-    
-      <div class="container p-1 divContainer">
-        <div class="bg-white w-100 p-4">
-          <div class="d-flex align-items-center justify-content-between">
-            <h3>Cesta</h3>
-            <p class="mt-5 mb-0 fw-medium">Precio</p>
-          </div>
-          <hr>
-          <% allShoppingCar.forEach((item) => { %>
-          <div class=" d-flex flex-row">
-            <div>
-              <img src="<%= item.bookImagePath %>" width="120" alt="">
+    <div class="container-fluid divContainer">
+      <div class="row">
+        <div class="col-sm-10">
+          <!-- Primera parte -->
+          <div class="bg-white w-100 p-4">
+            <div class="d-flex align-items-center justify-content-between">
+              <h3>Cesta</h3>
+              <p class="mt-5 mb-0 fw-medium">Precio</p>
             </div>
-            <div class="w-100 ms-5">
-              <p class="fs-5 fw-medium"><%= item.bookTitle %></p>
-              <p class="fw-bold" style="font-size: 15px;">Tapa blanda</p>
-              <p class="" style="font-size: 15px; color: yellowgreen;">diponible</p>
-              <a href="" id="moreInformation">Mas informacion</a>
-              <div class="d-flex flex-row justify-content-start align-items-center mt-2">
-                <p id="bookAmountQuantity" class="me-2 shadow">Cant.: <%= item.bookAmount %> </p>
-                <p>|</p>
-                <p id="deleteBook" class="text-primary">Eliminar</p>
+            <hr />
+            <% allShoppingCar.forEach((item) => { %>
+            <div class="d-flex flex-row">
+              <div>
+                <img src="<%= item.bookImagePath %>" width="120" alt="" />
+              </div>
+              <div class="w-100 ms-5">
+                <p class="fs-6">
+                  <strong class="fw-medium"><%= item.bookTitle %></strong><br>
+                  Por KENTARO MIURA
+                </p>
+                <p class="fw-bold" style="font-size: 15px">Tapa blanda</p>
+                <p class="" style="font-size: 15px; color: yellowgreen">
+                  diponible
+                </p>
+                <a href="" id="moreInformation">Mas informacion</a>
+                <div
+                  class="d-flex flex-row justify-content-start align-items-center mt-2"
+                >
+                  <p id="bookAmountQuantity" class="me-2 shadow">
+                    Cant.: <%= item.bookAmount %>
+                  </p>
+                  <p>|</p>
+                  <form action="/RemoveFromCar" method="post">
+                    <input type="text" hidden value="<%= item.shoppingCardId %>" name="removeCardId">
+                    <input type="text" hidden value="<%= Number(item.bookAmount) %>" name="removeTotalBooks">
+                    <button id="deleteBook" type="submit" class="text-primary border-0 bg-white p-0 m-0 ms-2 mb-3">Eliminar</button>
+                  </form>
+                </div>
+              </div>
+              <div>
+                <p class="fw-bold fs-4">US$<%= item.bookPrice %></p>
               </div>
             </div>
-            <div>
-              <p class="fw-bold fs-4">US$<%= item.bookPrice %> </p>
+            <hr />
+            <% }) %>
+            <div class="d-flex mt-0 justify-content-end">
+              <p class="fs-5">
+                Subtotal (<%= totalBooks %> <%= totalBooks > 1 ? "Productos" :
+                "Producto" %> ):
+                <strong class="fs-4">US$<%= subtotal %></strong>
+              </p>
             </div>
           </div>
-          <hr>
-          <% }) %> 
-          <div class="d-flex mt-0 justify-content-end">
-            <p class="fs-5">Subtotal (1 producto): <strong class="fs-4">US$<%= subtotal %></strong></p>
+        </div>
+        <div class="col-sm-2">
+          <!-- Segunda parte -->
+          <div class="w-100 bg-white p-4">
+            <strong class="fs-5">Ficha de compra</strong>
+            <hr>
+            <p class="fs-5">
+              Total a pagar: <strong class="fs-5">US$<%= subtotal %></strong>
+            </p>
+            <p class="fs-5">
+              total producto: <strong class="fs-5"><%= totalBooks %></strong>
+            </p>
+            <button class="btn btn-primary w-100 shadow p-1 mt-1 mb-1">
+              Proceder al pago
+            </button>
+            <p class="mt-5">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+              tenetur explicabo quaerat repudiandae animi sequi fuga inventore
+              nemo! Adipisci quis id sint illo amet? Rem dolore perferendis
+              impedit temporibus odio.
+            </p>
           </div>
         </div>
-      </div> 
+      </div>
+    </div>
     <!-- CONTENIDO PARA LA CESTA -->
 
     <div class="mt-5 mb-5">.</div>
