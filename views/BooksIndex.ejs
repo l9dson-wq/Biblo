@@ -143,17 +143,12 @@
                       style="background-color: #FFFFFF"
                     >
                       <!-- image -->
-                      <div class="w-100 d-flex justify-content-center align-items-center">
-                        <a
-                          href="/BooksInformation?bookID=<%= book.bookID %>"
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <img
-                            id="imageBook"
-                            class="shadow-lg img-fluid aspect-ratio-4x3"
-                            src="<%= book.ImagePath %>"
-                            alt=""
-                          />
+                      <div class="w-100 d-flex justify-content-center align-items-center position-relative">
+                        <% if ( book.createdDate === fechaHoy) { %>
+                          <span class="position-absolute top-0 start-0 bg-success text-light p-1">Nuevo</span>
+                        <% } %>  
+                        <a href="/BooksInformation?bookID=<%= book.bookID %>" class="d-flex justify-content-center align-items-center">
+                          <img id="imageBook" class="shadow-lg img-fluid aspect-ratio-4x3" src="<%= book.ImagePath %>" alt="" />
                         </a>
                       </div>
                       <!-- image -->
@@ -266,17 +261,5 @@
       </div>
     </div>
     <!-- CONTENIDO -->
-
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#sidebarMenu"
-      aria-controls="sidebarMenu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
   </body>
 </html>

@@ -34,12 +34,22 @@ const RenderBookIndex = async (req, res) => {
   //REDONDEO EL NUMERO A SOLO DOS DECIMALES DESPUES DEL PUNTO
   totalPrice = parseFloat(totalPrice.toFixed(2));
 
+  //Obtener la fecha en cierto formato
+  let fecha = new Date();
+  let dia = fecha.getDate().toString().padStart(2, '0');
+  let mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+  let anio = fecha.getFullYear().toString();
+
+  let fechaHoy = dia + '/' + mes + '/' + anio;
+  //Obtener la fecha en cierto formato
+
   res.render("BooksIndex", {
     session: req.session,
     booksList: books,
     message: "",
     nameSearched: undefined,
     totalNoti: totalBooks,
+    fechaHoy: fechaHoy,
   });
 };
 

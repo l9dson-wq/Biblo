@@ -37,6 +37,15 @@ const uploadFile = async (req, res) => {
   let totalPages = req.body.bookPages;
   let bookLanguage = req.body.bookLanguage;
 
+  //Obtener la fecha en cierto formato
+  let fecha = new Date();
+  let dia = fecha.getDate().toString().padStart(2, '0');
+  let mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+  let anio = fecha.getFullYear().toString();
+
+  let fechaHoy = dia + '/' + mes + '/' + anio;
+  //Obtener la fecha en cierto formato
+
   price = parseFloat(price);
 
   let result = await uploadBookModel.uploadBook(
@@ -53,6 +62,7 @@ const uploadFile = async (req, res) => {
     genre1,
     genre2,
     genre3,
+    fechaHoy
   );
 
   res.redirect("BooksIndex");
