@@ -3,6 +3,7 @@ const router = express.Router();
 const session = require("express-session");
 const GetAllBooksModel = require("../../Model/Books/GetAllBooks.Mode");
 const getAllShoppingCarModel = require("../../Model/Books/ShoppingCar.Model");
+const commentsModel = require("../../Model/comments/comments.Model");
 
 const RenderBookIndex = async (req, res) => {
   let books = await GetAllBooksModel.GetAllBooks();
@@ -17,6 +18,19 @@ const RenderBookIndex = async (req, res) => {
       Description: book.Description.substring(0, 100),
     };
   });
+
+  let bookComments = await commentsModel.GetAllComments();
+  for (let i = 0; i < books.length; i++) {
+    for (let j = 0; j < bookComments.length; j++) {
+      if (books[i].bookID === bookComments[j].bookId) {
+        console.log(books[i].bookID);
+      }
+    }
+  }
+
+  //console.log("comentarios: ", bookComments);
+
+  // console.log(books);
 
   // ----
   let totalShoppingCar = await getAllShoppingCarModel.getAllShoppingCar(userID);
@@ -50,6 +64,7 @@ const RenderBookIndex = async (req, res) => {
     nameSearched: undefined,
     totalNoti: totalBooks,
     fechaHoy: fechaHoy,
+    bookComments: bookComments, 
   });
 };
 

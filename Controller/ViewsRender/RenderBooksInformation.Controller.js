@@ -30,7 +30,6 @@ const RenderBooksInformation = async (req, res) => {
   let totalPrice = 0;
   let totalBooks = 0;
 
-
   //SUMO EL PRECIO TOTAL DE TODOS LOS LIBROS Y EL TOTAL DE LAS UNIDADES
   for (let i = 0; i < totalShoppingCar.length; i++) {
     totalPrice += totalShoppingCar[i].totalPrice;

@@ -8,7 +8,7 @@ const RenderHome = async (req, res) => {
 
     let totalShoppingCar = await getAllShoppingCarModel.getAllShoppingCar(userID);
     let totalShoppingCarNumber = Number(totalShoppingCar.length);
-    console.log(totalShoppingCarNumber);
+    // console.log(totalShoppingCarNumber);
 
     let totalPrice = 0;
     let totalBooks = 0;

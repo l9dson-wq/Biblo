@@ -25,4 +25,15 @@ const GetComments = async (userId, bookId) => {
   }
 };
 
-module.exports = { SaveComment, GetComments };
+const GetAllComments = async () => {
+  try{
+    let result = await sql.query(
+      `SELECT * FROM userComments`
+    );
+    return result.recordset;
+  }catch(error){
+    console.log("ha ocurrido un error en comments.model: ", error);
+  }
+};
+
+module.exports = { SaveComment, GetComments, GetAllComments };

@@ -169,10 +169,13 @@
                         >
                           <%= book.Stock == 0 ? "Temporalmente no disponible" : "$" + book.Price.toFixed(2) %>
                         </p>
+                        
                         <p class="text-success fw-medium" id="envioGratis">
                           <% if ( book.Stock <= 5 && book.Stock > 1 ) {%>
-                            <i class="fa fa-solid fa-truck"></i> ¡ENVÍO GRATIS!
-                          <% } else { "" } %>  
+                            <p class="text-success"><i class="fa fa-solid fa-truck"></i> ¡ENVÍO GRATIS!</p>
+                          <% } else { %>
+                            <p class="text-decoration-line-through text-danger"><i class="fa fa-solid fa-truck"></i> ¡ENVÍO GRATIS!</p>
+                          <% } %>  
                         </p>
                       </div>
                       <!-- INFORMATION -->
