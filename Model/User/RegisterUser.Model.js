@@ -21,7 +21,10 @@ async function insertUser(
     );
 
     if (userNameGot.recordset.length !== 0) {
-      return `El nombre de usuario ${usuario} ya ha sido registro, intente con uno diferente`;
+      return({
+        message: `El nombre de usuario ${usuario} ya ha sido registro, intente con uno diferente`,
+        error: true,
+      });
     }
 
     await sql.query(
