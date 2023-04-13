@@ -96,5 +96,6 @@ router.post('/AddToCar', isAuthenticatedController.isAuthenticated, shoppingCarC
 router.get('/Cesta', isAuthenticatedController.isAuthenticated, RenderCestaController.RenderCesta )
 //remover de la cesta
 router.post('/RemoveFromCar', isAuthenticatedController.isAuthenticated, removeShoppingCarController.removeShoppingCar);
+router.post('/DeleteFromCar', isAuthenticatedController.isAuthenticated, removeShoppingCarController.deleteFromShoppingCar );
 
 module.exports = router;

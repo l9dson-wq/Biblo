@@ -74,7 +74,7 @@ const editingBookInformation = async (req, res) => {
       bookId
     );
 
-    res.redirect("BooksIndex");
+    res.redirect(`BooksInformation?bookID=${bookId}`);
   } catch (error) {
     console.log("ocurrio un error en EditBooks.Controller: ", error);
   }

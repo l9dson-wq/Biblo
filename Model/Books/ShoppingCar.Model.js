@@ -77,4 +77,15 @@ const removeShoppingCar = async (carId, userId, totalBooks) => {
     }
 };
 
-module.exports = { shoppingCar, getAllShoppingCar, removeShoppingCar,  };
+const deleteFromShoppingCar = async (carId, userId, totalBooks, removeBookId) => {
+  try{
+    await sql.query(
+      `DELETE FROM ShoppingCar WHERE bookId = ${removeBookId} AND userId = ${userId}`
+    );
+    return true;
+  }catch(error){
+    console.log("Ocurrio un error Eliminando del carrito de compras: ", error);
+  }
+};
+
+module.exports = { shoppingCar, getAllShoppingCar, removeShoppingCar, deleteFromShoppingCar };

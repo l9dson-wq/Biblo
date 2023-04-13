@@ -165,7 +165,7 @@
           <!-- Segunda parte -->
           <div class="bg-white p-5">
             <div>
-              <% if ( book.Stock <= 5 && book.Stock > 1 ) { %>
+              <% if ( book.Stock <= 5 && book.Stock >= 1 ) { %>
                 <div class="d-flex flex-row">
                   <p class="fs-5 me-4 text-decoration-line-through text-danger">$<%= book.Price %></p>
                   <span style="font-size: 85%;" class="bg-danger p-1 text-white w-100 h-25">-5% de dto. excusivo</span>
@@ -482,8 +482,8 @@
         </div>
 
         <% if ( comments.length !== 0 && comments.length > 2 ) { %>
-          <a id="load-more" style="background-color: #D9017A;" class="btn w-100 text-white">Cargar más comentarios</a>
-          <a id="hideCommentsBtn" class="btn btn-primary w-100 text-white" style="display: none; background-color: #D9017A;">Ocultar comentarios</a>
+          <a id="load-more" style="background-color: #D9017A;" class="btn w-100 text-white mb-5">Cargar más comentarios</a>
+          <a id="hideCommentsBtn" class="btn btn-primary w-100 text-white mb-5" style="display: none; background-color: #D9017A;">Ocultar comentarios</a>
         <% } %>  
         <!-- LISTA DE COMENTARIOS -->
       </div>

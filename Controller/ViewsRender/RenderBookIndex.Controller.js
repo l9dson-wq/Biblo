@@ -21,12 +21,23 @@ const RenderBookIndex = async (req, res) => {
 
   let bookComments = await commentsModel.GetAllComments();
   for (let i = 0; i < books.length; i++) {
+    books[i].comments = 0; // inicializa la propiedad "comments" en 0
     for (let j = 0; j < bookComments.length; j++) {
       if (books[i].bookID === bookComments[j].bookId) {
-        console.log(books[i].bookID);
+        books[i].comments += 1;
       }
     }
   }
+
+  //Descuento
+  //SACANDO EL PORCENTAJE
+  for(let i = 0; i < books.length; i++){
+    if( books[i].Stock <= 5 && books[i].Stock > 0){
+      books[i].Discount = parseFloat((14 * parseFloat(books[i].Price)) / 100).toFixed(2);
+    }
+  }
+
+  console.log(books);
 
   //console.log("comentarios: ", bookComments);
 

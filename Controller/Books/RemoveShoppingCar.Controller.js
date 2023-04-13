@@ -17,4 +17,19 @@ const removeShoppingCar = async (req, res) => {
     }
 };
 
-module.exports = { removeShoppingCar, };
+const deleteFromShoppingCar = async (req, res) => {
+    let userId = req.session.userId;
+    let carId = req.body.removeCardId;
+    let totalBooks = req.body.removeTotalBooks;
+    let removeBookId = req.body.removeBookId;
+
+    let result = await shoppingCarModel.deleteFromShoppingCar(carId, userId, totalBooks, removeBookId);
+
+    if(result){
+        return res.redirect("Cesta");
+    }else{
+        return res.redirect("Cesta");
+    }
+};
+
+module.exports = { removeShoppingCar, deleteFromShoppingCar,  };
