@@ -3,6 +3,23 @@ if (window.location.search.includes("runFunction=true")) {
   successModal();
 }
 
+//Verifico si la variable del erro al agregar al carrito esta presente en la URL
+if (window.location.search.includes("errorAddingToCar=true")){
+  errorAddToCar();
+}
+
+//Este es el modal que sale verificando la compra del libro
+function successModal() {
+  // Código de la función aquí
+  document.getElementsByClassName("popup")[0].classList.add("active");
+}
+
+//modal que sale cuando se intenta añadir una cantidad del libro mayor a la disponible
+function errorAddToCar() {
+  //codigo de mi funcion aqui
+  document.getElementById("errorAddingToCarModal").classList.add("active");
+}
+
 function validarCantidad() {
   var cantidad = document.getElementById("cantidad").value;
   let bookStock = document.getElementById("inputBookStock").value;
@@ -22,9 +39,4 @@ function validarCantidad() {
   } else {
     return true; // permite enviar el formulario al servidor
   }
-}
-
-function successModal() {
-  // Código de la función aquí
-  document.getElementsByClassName("popup")[0].classList.add("active");
-}
+} 

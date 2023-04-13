@@ -22,7 +22,7 @@ const RenderBooksInformation = async (req, res) => {
   let totalShoppingCar = await getAllShoppingCarModel.getAllShoppingCar(userID);
 
   //SACANDO EL PORCENTAJE
-  if( result[0].Stock >= 5 && result[0].Stock > 1){
+  if( result[0].Stock <= 5 && result[0].Stock > 1){
     result[0].Discount = parseFloat((14 * parseFloat(result[0].Price)) / 100).toFixed(2);
   }
 
@@ -37,6 +37,8 @@ const RenderBooksInformation = async (req, res) => {
   }
   //REDONDEO EL NUMERO A SOLO DOS DECIMALES DESPUES DEL PUNTO
   totalPrice = parseFloat(totalPrice.toFixed(2));
+
+  console.log(result);
 
   res.render("BooksInformation", {
     session: req.session,

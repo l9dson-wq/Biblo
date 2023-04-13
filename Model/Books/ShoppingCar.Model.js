@@ -12,6 +12,19 @@ const shoppingCar = async (
       `SELECT * FROM ShoppingCar WHERE bookId = ${bookId} AND userId = ${userId}`
     );
 
+    let bookResult = await sql.query(
+      `SELECT * FROM Books WHERE bookId = ${bookId}`
+    );
+
+    console.log(result.recordset);
+
+    if( result.recordset.length !== 0 ){
+      if ( result.recordset[0].bookAmount === bookResult.recordset[0].Stock ) {
+        console.log("Este libro ya alcanzo el maximo disponible");
+        return false;
+      }
+    }
+
     if (result.recordset.length !== 0) {
       await sql.query(
         `UPDATE ShoppingCar SET bookAmount = bookAmount + 1, totalPrice = totalPrice + ${bookPrice} WHERE shoppingCardId = ${result.recordset[0].shoppingCardId} `

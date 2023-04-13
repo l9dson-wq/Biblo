@@ -25,7 +25,7 @@ const shoppingCar = async (req, res) => {
     if(result){
         return res.redirect(`BooksInformation?bookID=${bookId}`);
     }else{
-        return res.redirect(`BooksInformation?bookID=${bookId}`);
+        return res.redirect(`BooksInformation?bookID=${bookId}&errorAddingToCar=true`);
     }
 };
 
