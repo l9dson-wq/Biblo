@@ -163,12 +163,12 @@
         </div>
         <div class="col-sm-3">
           <!-- Segunda parte -->
-          <div class="bg-white p-5">
+          <div class="bg-white p-4">
             <div>
               <% if ( book.Stock <= 5 && book.Stock >= 1 ) { %>
                 <div class="d-flex flex-row">
                   <p class="fs-5 me-4 text-decoration-line-through text-danger">$<%= book.Price %></p>
-                  <span style="font-size: 85%;" class="bg-danger p-1 text-white w-100 h-25">-5% de dto. excusivo</span>
+                  <span style="font-size: 100%; height: 15%;" class="bg-danger p-1 text-white w-100">-14% de dto. excusivo</span>
                 </div>
                 <p class="h2 me-4">$<%= book.Discount %></p>
               <% } else { %>
