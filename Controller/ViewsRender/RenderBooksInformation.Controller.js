@@ -31,9 +31,9 @@ const RenderBooksInformation = async (req, res) => {
   let totalBooks = 0;
 
   //SUMO EL PRECIO TOTAL DE TODOS LOS LIBROS Y EL TOTAL DE LAS UNIDADES
-  for (let i = 0; i < totalShoppingCar.length; i++) {
-    totalPrice += totalShoppingCar[i].totalPrice;
-    totalBooks += Number(totalShoppingCar[i].bookAmount);
+  for (let i = 0; i < totalShoppingCar.result.length; i++) {
+    totalPrice += totalShoppingCar.result[i].totalPrice;
+    totalBooks += Number(totalShoppingCar.result[i].bookAmount);
   }
   //REDONDEO EL NUMERO A SOLO DOS DECIMALES DESPUES DEL PUNTO
   totalPrice = parseFloat(totalPrice.toFixed(2));

@@ -25,6 +25,8 @@ const ActivateUserByAdminController = require("./Controller/User/ActivateAccount
 const shoppingCarController = require("./Controller/Books/ShoppingCar.Controller");
 const RenderCestaController = require("./Controller/ViewsRender/RenderCesta.Controller");
 const removeShoppingCarController = require("./Controller/Books/RemoveShoppingCar.Controller");
+const buyShoppingCarController = require("./Controller/Books/buyShoppinCard.Controller");
+const AdminSellsController = require("./Controller/sells/AdminSells.Controller");
 
 router.get("/", isAuthenticatedController.isAuthenticated, userController.getUsers);
 
@@ -76,6 +78,8 @@ router.get('/BooksInformation', isAuthenticatedController.isAuthenticated, Rende
 
 // Comprar libros
 router.post('/BuyBooks', isAuthenticatedController.isAuthenticated, BuyBookController.BuyBook);
+//Comprar libros desde la cesta
+router.post('/CestaBuyBooks', isAuthenticatedController.isAuthenticated, buyShoppingCarController.buyShoppingCar);
 
 //Lista de favoritos
 router.get('/Favorites', isAuthenticatedController.isAuthenticated, RenderFavoritesController.RenderFavorites );
@@ -97,5 +101,12 @@ router.get('/Cesta', isAuthenticatedController.isAuthenticated, RenderCestaContr
 //remover de la cesta
 router.post('/RemoveFromCar', isAuthenticatedController.isAuthenticated, removeShoppingCarController.removeShoppingCar);
 router.post('/DeleteFromCar', isAuthenticatedController.isAuthenticated, removeShoppingCarController.deleteFromShoppingCar );
+
+//apartado para las ventas que vera el Administrador
+router.get('/AdminSells', isAuthenticatedController.isAuthenticatedAsAdmin, AdminSellsController.getAllSells);
+//apartado para las ventas que vera el usuario.
+router.get('/UserSells', isAuthenticatedController.isAuthenticated ,AdminSellsController.getAllUsersSells );
+//Apartado para ver las ventas por fecha para el administrador
+router.post('/SpecificSell', isAuthenticatedController.isAuthenticatedAsAdmin, AdminSellsController.getAllSellsByDate);
 
 module.exports = router;

@@ -42,18 +42,21 @@
                 >Favorites</a
               >
             </li>
-            <!-- <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/Cesta">Cesta</a>
-            </li> -->
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/UserSells">Mis compras</a>
+              </li>
             <% if( session.Role === "Admin") { %>
-            <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/">admin. users</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/BooksRegistration"
-                >Regis. Book</a
-              >
-            </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/AdminSells">Ventas</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/">admin. users</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/BooksRegistration"
+                  >Regis. Book</a
+                >
+              </li>
             <% } %>
           </ul>
         </div>
@@ -120,8 +123,8 @@
 
     <!-- CONTENIDO -->
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-10">
+      <div class="row ">
+        <div class="col-sm-10 ">
           <!-- Primera parte -->
           <!-- Aquí va el contenido principal -->
           <% if ( message !== "") { %>
@@ -138,7 +141,7 @@
             </div>
             <!-- Mensaje de stock no encontrado -->
             <% }else { %>
-              <div class="ms-5 album mb-5">
+              <div class="ms-5 album mb-5 border-start border-1 border-disable">
                 <div class="row ms-5 row-cols-6">
                   <% booksList.forEach((book) => {%>
                   <div class="col d-flex justify-content-center align-items-center" id="elPapa" style="border: 1px solid #d0d0d0;">
@@ -167,13 +170,13 @@
                       <!-- INFORMATION -->
                       <div id="informationSide" class="w-100 d-flex flex-column justify-content-start align-items-start mb-0 mt-0">
                         <p class="fw-bold" id="bookTitleStyle" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= book.Title %></p>
-                        <p class="text-secondary" style="height: 1%;"><%= book.Autor %></p>
-                        <p></p>
+                        <!-- <p class="text-secondary" style="height: 5%; "><%= book.Autor %></p> -->
+                        <p class="text-secondary" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= book.Autor %></p>
                         <% if ( book.Stock <= 5 && book.Stock >= 1 ) { %>
-                          <div style="height: 7%;">
+                          <div style="height: 5%;">
                             <div class="d-flex flex-row">
                               <p class="fs-5 me-4 text-decoration-line-through text-danger" >$<%= book.Price %></p>
-                              <span style="font-size: 85%;" class="bg-danger p-1 text-white h-25">-14%</span>
+                              <span style="font-size: 75%;" class="bg-danger p-1 text-white h-25">-15%</span>
                             </div>
                           </div>
                         <% } %>  

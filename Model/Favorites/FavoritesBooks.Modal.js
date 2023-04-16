@@ -5,10 +5,6 @@ const getFavorites = async (userID) => {
     let result = await sql.query(
       `SELECT * FROM Favorites WHERE userId = ${userID}`
     );
-    // let books;
-    // let imageLocation = [];
-
-    //console.log(result.recordset);
 
     let bookId = result.recordset.map((item) => item.bookId);
 
@@ -26,11 +22,6 @@ const getFavorites = async (userID) => {
 
     let imageLocations = await Promise.all(imageLocationPromises);
     let booksName = imageLocations.map((item) => item.bookName);
-
-    // console.log(booksName); // Array de nombres de libros
-
-    // console.log(bookId);
-    //console.log(imageLocations);
 
     return {
       booksName: booksName,

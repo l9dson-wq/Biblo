@@ -10,4 +10,12 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
-module.exports = { isAuthenticated, };
+const isAuthenticatedAsAdmin = (req, res, next) => {
+  if (req.session && req.session.userId && req.session.Role === "Admin") {
+    return next();
+  } else {
+    res.redirect("/Home");
+  }
+};
+
+module.exports = { isAuthenticated, isAuthenticatedAsAdmin, };

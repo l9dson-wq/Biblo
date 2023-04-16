@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Sells</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+    crossorigin="anonymous"
+    />
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-black bg-black shadow-lg fixed-top">
+        <div class="container-fluid">
+            <div class="d-flex flex-row align-items-center">
+            <a class="navbar-brand text-white" href="/Home"
+                ><h1 class="display-6">Biblos</h1></a
+            >
+            <ul class="navbar-nav d-flex flex-row align-items-center">
+                <li class="nav-item m-2">
+                <a
+                    class="nav-link active text-white"
+                    aria-current="page"
+                    href="/Home"
+                    >Home</a
+                >
+                </li>
+                <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/BooksIndex">Books</a>
+                </li>
+                <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/Favorites"
+                    >Favorites</a
+                >
+                </li>
+                <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/UserSells">Mis compras</a>
+                </li>
+                <% if( session.Role === "Admin") { %>
+                    <li class="nav-item m-2">
+                        <a class="nav-link active text-white" href="/AdminSells">Ventas</a>
+                      </li>
+                    <li class="nav-item m-2">
+                    <a class="nav-link active text-white" href="/">admin. users</a>
+                    </li>
+                    <li class="nav-item m-2">
+                    <a class="nav-link active text-white" href="/BooksRegistration"
+                        >Regis. Book</a
+                    >
+                    </li>
+                <% } %>
+            </ul>
+            </div>
+            <!-- Buscar por titulo de libro -->
+            <form
+            class="d-flex input-group w-25"
+            method="post"
+            action="/BooksIndex"
+            >
+            <input name="searchName" type="text" class="me-3 form-control rounded"
+            placeholder="Buscar" width="200" value="<%= nameSearched !== "" ?
+            nameSearched : "" %>" />
+            <button type="submit" class="border-0 rounded-circle p-1 bg-white">
+                <span class="p-2" id="search-addon">
+                <i class="fa fa-search"></i>
+                </span>
+            </button>
+            </form>
+            <!-- Buscar por titulo de libro -->
+            <div class="w-25 d-flex justify-content-end align-items-center">
+            <div class="d-flex justify-content-end align-items-center">
+                <% if( session.Role !== "Admin") { %>
+                <a
+                href="/Cesta"
+                class="me-1 d-flex justify-content-center align-items-center"
+                >
+                    <p class="text-white">
+                    <i
+                        class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"
+                        ></i
+                    >
+                    <span
+                        class="badge badge-danger bg-danger badge-pill position-absolute"
+                        style="top: 30px; right: 230px; border-radius: 50%"
+                        ><%= totalNoti %>
+                    </span>
+                    </p>
+                </a>
+                <% } %>
+                <p class="text-white m-3 ms-5">
+                <%= session.Name + " " + session.LastName %>
+                </p>
+                <img
+                src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+                class="rounded-circle"
+                height="45"
+                alt="Portrait of a Woman"
+                loading="lazy"
+                />
+            </div>
+            </div>
+        </div>
+    </nav>
+    <!-- NAVBAR -->
+
+    <div class="text-white mt-5 mb-5">
+        .
+    </div>
+
+    <div class="position-relative">
+        <hr class="border-top border-secondary mt-n2">
+        <span class="position-absolute top-0 start-50 translate-middle bg-white px-4 fs-4 " style="font-family: 'Source Serif Pro';">Compras</span>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="mt-5 col-sm-11">
+            <!-- Primera parte -->
+            <% for(let i = 0; i < result.length; i++) { %>
+                <% if ( session.userId === result[i].userId ) { %>
+                    <div class="mb-5 border border-1 rounded border-disable p-5 d-flex flex-row justify-content-between align-items-start">
+                        <div class="me-5">
+                            <a href="/BooksInformation?bookID=<%= result[i].bookId%>">
+                                <img src="<%= result[i].imagePath %>" class="shadow" alt="" width="100">
+                            </a>
+                        </div>
+                        <div class="w-100 d-flex flex-row align-items-center justify-content-between">
+                            <div>
+                                <p style="font-size: 95%;">Cantidad</p>
+                                <p class="fw-bold"><%= result[i].totalBooks%></p>
+                            </div>
+                            <div>
+                                <p style="font-size: 95%;">Precio Original</p>
+                                <p class="fw-bold"><%= result[i].originalPrice%></p>
+                            </div>
+                            <div>
+                                <p style="font-size: 95%;">Dia de compra</p>
+                                <p class="fw-bold"><%= result[i].sellDate%></p>
+                            </div>
+                            <div>
+                                <p style="font-size: 95%;">Titulo del libro</p>
+                                <p class="fw-bold"><%= result[i].bookTitle%></p>
+                            </div>
+                        </div>
+                        <div class="ms-5">
+                            <p style="font-size: 95%;">Total</p>
+                            <p class="text-danger fs-4 fw-bold">$<%= result[i].totalPrice %> </p>
+                        </div>
+                    </div>
+                <% } %>  
+            <% } %>
+            </div>
+            <div class="col-sm-1 mt-5">
+            <!-- Segunda parte -->
+            </div>
+        </div>
+    </div>  
+</body>
+</html>

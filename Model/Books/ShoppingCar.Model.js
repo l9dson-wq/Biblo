@@ -49,9 +49,23 @@ const getAllShoppingCar = async (userId) => {
     let result = await sql.query(
       `SELECT * FROM ShoppingCar WHERE userId = ${userId}`
     );
-    return result.recordset;
+
+    let booksIDs = [];
+    for( let i = 0; i < result.recordset.length; i++ ){
+      booksIDs.push(result.recordset[i].bookId);
+    }
+
+    let books = [];
+    for( let i = 0; i < booksIDs.length; i++){
+      books.push((await sql.query(`SELECT * FROM Books WHERE bookID = ${booksIDs[i]}`)).recordset);
+    }
+
+    return({
+      result: result.recordset,
+      books: books,
+    });
   } catch (erro) {
-    console.log("Ocurrio un error obteniendo los carritos de compra: ", error);
+    console.log("Ocurrio un error obteniendo los carritos de compra: ", erro);
   }
 };
 

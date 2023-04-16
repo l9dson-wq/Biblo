@@ -1,0 +1,9 @@
+.lift-on-hover {
+    transition: transform 0.2s ease-out;
+  }
+  
+  .lift-on-hover:hover {
+    transform: translateY(-5px);
+    text-transform: uppercase;
+    font-weight: bolder;
+  }

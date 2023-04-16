@@ -43,22 +43,24 @@
                     >Favorites</a
                   >
                 </li>
-                <!-- <li class="nav-item m-2">
-                  <a class="nav-link active text-white" href="/Cesta"
-                    >Cesta</a
-                  > -->
+                <li class="nav-item m-2">
+                  <a class="nav-link active text-white" href="/UserSells">Mis compras</a>
+                  </li>
                 </li>
                 <% if( session.Role === "Admin") { %>
-                <li class="nav-item m-2">
-                  <a class="nav-link active text-white" href="/"
-                    >admin. users</a
-                  >
-                </li>
-                <li class="nav-item m-2">
-                  <a class="nav-link active text-white" href="/BooksRegistration"
-                    >Regis. Book</a
-                  >
-                </li>
+                  <li class="nav-item m-2">
+                    <a class="nav-link active text-white" href="/AdminSells">Ventas</a>
+                  </li>
+                  <li class="nav-item m-2">
+                    <a class="nav-link active text-white" href="/"
+                      >admin. users</a
+                    >
+                  </li>
+                  <li class="nav-item m-2">
+                    <a class="nav-link active text-white" href="/BooksRegistration"
+                      >Regis. Book</a
+                    >
+                  </li>
                 <% } %>
               </ul>
             </div>
@@ -79,6 +81,7 @@
             <!-- Buscar por titulo de libro -->
             <div class="w-25 d-flex justify-content-end align-items-center">
               <div class="d-flex justify-content-end align-items-center">
+                <!-- <a href="/" class="text-white me-5" style="text-decoration: none;">Billetera</a> -->
                 <% if( session.Role !== "Admin") { %>
                   <a
                   href="/Cesta"

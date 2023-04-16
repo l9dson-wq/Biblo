@@ -9,9 +9,6 @@ const FavoriteBook = async (req, res) => {
 
     bookId = Number(bookId);
 
-    // console.log(bookId);
-    // console.log(userId);
-
     let result = await addFavoriteModel.addFavorite(bookId, userId);
     //console.log(result);
 

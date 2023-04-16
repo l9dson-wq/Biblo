@@ -4,22 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Favorites</title>
+    <title>Admin Sells</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/css/favoritesStyles.css" />
-    <script
-    src="https://kit.fontawesome.com/b55d7e5cd9.js"
-    crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="/css/adminSells.css" />
   </head>
-  <body class="">
+  <body>
     <!-- NAVBAR -->
-    <nav class="navbar navbar-black bg-black fixed-top">
+    <nav class="navbar navbar-black bg-black shadow-lg fixed-top">
       <div class="container-fluid">
         <div class="d-flex flex-row align-items-center">
           <a class="navbar-brand text-white" href="/Home"
@@ -43,28 +39,33 @@
               >
             </li>
             <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/UserSells">Mis compras</a>
-              </li>
+              <a class="nav-link active text-white" href="/UserSells"
+                >Mis compras</a
+              >
+            </li>
             <% if( session.Role === "Admin") { %>
-              <li class="nav-item m-2">
-                <a class="nav-link active text-white" href="/AdminSells">Ventas</a>
-              </li>
-              <li class="nav-item m-2">
-                <a class="nav-link active text-white" href="/">admin. users</a>
-              </li>
-              <li class="nav-item m-2">
-                <a class="nav-link active text-white" href="/BooksRegistration"
-                  >Regis. Book</a
-                >
-              </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/AdminSells"
+                >Ventas</a
+              >
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/">admin. users</a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/BooksRegistration"
+                >Regis. Book</a
+              >
+            </li>
             <% } %>
           </ul>
         </div>
         <!-- Buscar por titulo de libro -->
         <form
-        class="d-flex input-group w-25"
-        method="post"
-        action="/BooksIndex">
+          class="d-flex input-group w-25"
+          method="post"
+          action="/BooksIndex"
+        >
           <input name="searchName" type="text" class="me-3 form-control rounded"
           placeholder="Buscar" width="200" value="<%= nameSearched !== "" ?
           nameSearched : "" %>" />
@@ -78,22 +79,22 @@
         <div class="w-25 d-flex justify-content-end align-items-center">
           <div class="d-flex justify-content-end align-items-center">
             <% if( session.Role !== "Admin") { %>
-              <a
+            <a
               href="/Cesta"
               class="me-1 d-flex justify-content-center align-items-center"
-              >
-                <p class="text-white">
-                  <i
-                    class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"
-                    ></i
-                  >
-                  <span
-                    class="badge badge-danger bg-danger badge-pill position-absolute"
-                    style="top: 30px; right: 230px; border-radius: 50%"
-                    ><%= totalNoti %>
-                  </span>
-                </p>
-              </a>
+            >
+              <p class="text-white">
+                <i
+                  class="h3 fa fa-regular fa-bag-shopping d-inline-block align-middle"
+                  ></i
+                >
+                <span
+                  class="badge badge-danger bg-danger badge-pill position-absolute"
+                  style="top: 30px; right: 230px; border-radius: 50%"
+                  ><%= totalNoti %>
+                </span>
+              </p>
+            </a>
             <% } %>
             <p class="text-white m-3 ms-5">
               <%= session.Name + " " + session.LastName %>
@@ -111,28 +112,34 @@
     </nav>
     <!-- NAVBAR -->
 
-    <div class="mt-5 mb-5 text-white">.</div>
+    <div class="text-white mt-5 mb-5">.</div>
 
     <div class="position-relative">
-      <hr class="border-top border-secondary mt-n2">
-      <span class="position-absolute top-0 start-50 translate-middle bg-white px-4 fs-4 " style="font-family: 'Source Serif Pro';">Favoritos</span>
-  </div>
+      <hr class="border-top border-secondary mt-n2" />
+      <span
+        class="position-absolute top-0 start-50 translate-middle bg-white px-4 fs-4"
+        style="font-family: 'Source Serif Pro'"
+        >Ventas</span
+      >
+    </div>
 
-    <div
-      class="row row-cols-1 row-cols-md-5 g-2 justify-content-center align-items-center mx-auto w-50 p-3 mb-5 rounded"
-    >
-      <% imageLocations.forEach((images) => { %>
-      <div class="col mb-3">
-        <a href="/BooksInformation?bookID=<%= images.bookId %>">
-          <img
-          src="<%= images.imageLocation %>"
-          alt="<%= images.bookName %>"
-          class="shadow w-75"
-        />
-        </a>
+    <div class="container">
+      <div class="row">
+        <div class="mt-5 d-flex flex-wrap justify-content-center">
+          <% for (let date of dates) { %>
+            <form action="/SpecificSell" method="post">
+              <button
+              type="submit"
+              style="text-decoration: none"
+              class="w-75 me-5 mb-5 p-5 shadow rounded border d-flex flex-row align-items-center justify-content-center col-2 text-dark lift-on-hover"
+              >
+                <input type="text" hidden value="<%=date%>" name="requiredDate">
+                <p><%= date %></p>
+            </button>
+            </form>
+          <% } %>
+        </div>
       </div>
-
-      <% }) %>
     </div>
   </body>
 </html>

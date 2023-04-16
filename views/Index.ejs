@@ -37,20 +37,22 @@
                 >Favorites</a
               >
             </li>
-            <!-- <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/Cesta"
-                >Cesta</a
-              >
-            </li> -->
+            <li class="nav-item m-2">
+              <a class="nav-link active text-white" href="/UserSells">Mis compras</a>
+              </li>
+            </li>
             <% if( session.Role === "Admin") { %>
-            <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/">admin. users</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link active text-white" href="/BooksRegistration"
-                >Regis. Book</a
-              >
-            </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/AdminSells">Ventas</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/">admin. users</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link active text-white" href="/BooksRegistration"
+                  >Regis. Book</a
+                >
+              </li>
             <% } %>
           </ul>
         </div>
