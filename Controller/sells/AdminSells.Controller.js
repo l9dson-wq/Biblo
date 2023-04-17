@@ -79,16 +79,7 @@ const getAllSells = async (req, res) => {
 const getAllUsersSells = async (req, res) => {
   let userId = req.session.userId;
 
-  //Obtener la fecha en cierto formato
-  let fecha = new Date();
-  let dia = fecha.getDate().toString().padStart(2, "0");
-  let mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
-  let anio = fecha.getFullYear().toString();
-
-  let fechaHoy = dia + "/" + mes + "/" + anio;
-  //Obtener la fecha en cierto formato
-
-  let allSells = await getAllSellModel.GetAllUsersSells(fechaHoy, userId);
+  let allSells = await getAllSellModel.GetAllUsersSells(userId);
   let allShopping = allSells.shopping;
   let allUsers = allSells.users;
   let allBooks = allSells.books;

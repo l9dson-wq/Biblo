@@ -5,7 +5,6 @@ const GetAllSells = async (fechaHoy) => {
         let result = await sql.query(
             `SELECT * FROM Shopping`
         );
-        console.log("resultado de las compras de hoy: ", result.recordset);
 
         let resultUser = await sql.query(
             `SELECT * FROM Users`
@@ -50,12 +49,11 @@ const getSpecificSells = async (fecha) => {
     }
 };
 
-const GetAllUsersSells = async (fechaHoy, userId ) => {
+const GetAllUsersSells = async ( userId ) => {
     try{
         let result = await sql.query(
-            `SELECT * FROM Shopping WHERE soldDate = '${fechaHoy}' AND userId = ${userId}`
+            `SELECT * FROM Shopping WHERE userId = ${userId}`
         );
-        console.log("resultado de las compras de hoy: ", result.recordset);
 
         let resultUser = await sql.query(
             `SELECT * FROM Users WHERE userID = ${userId}`

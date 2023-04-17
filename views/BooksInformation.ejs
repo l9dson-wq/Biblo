@@ -152,7 +152,7 @@
                 <% } %>  
               </div>
               <strong class="h5 mb-2">Resumen de <%= book.Title  %> </strong>
-              <p id="description" style="white-space: pre-line; font-family: 'Times New Roman', Times, serif;" class="h5 mt-2">
+              <p id="description" style="font-family: 'Times New Roman', Times, serif;" class="h5 mt-2">
                 -<%= book.Description.replace(/\./g, ".\n") %>
               </p>
             </div>
@@ -217,8 +217,8 @@
               <input type="text" hidden value="<%= book.Price %>" name="bookPriceCar">
               <!-- informaciones necesarias para el carrito -->
               <% if ( book.Stock !== 0 ) { %>
-                <div class="mt-2 mb-3 d-flex flex-row justify-content-center align-items-center">
-                  <button type="submit" class="btn btn-outline-success" data-mdb-ripple-color="dark">Añadir a la cesta</button>
+                <div class="mt-2 w-100 mb-3 d-flex flex-row justify-content-center align-items-center">
+                  <button type="submit" class="btn btn-outline-success w-75" data-mdb-ripple-color="dark">Añadir a la cesta</button>
                 </div>
               <% } else { %>
                 <div class="mt-2 mb-3 d-flex flex-row justify-content-center align-items-center">
@@ -231,7 +231,7 @@
               <i class="fa fa-solid fa-gift"></i> Recibe increibles ofertas! 
             </h6>
             <!-- GUARDAR COMO FAVORITOS -->
-            <div class="d-flex flex-row align-items-center mt-5">
+            <div class="d-flex flex-row align-items-center justify-content-center mt-5">
               <form action="/SaveFavorites" method="post">
                 <input
                   type="text"
@@ -245,10 +245,6 @@
                   GUARDAR
                 </button>
               </form>
-              <button class="bg-white text-black btn-outline border-0">
-                <i class="fa fa-solid fa-copy me-1"></i>
-                COPIAR
-              </button>
             </div>
             <!-- GUARDAR COMO FAVORITOS -->
             <!-- ELIMINAR Y EDITAR -->
@@ -296,8 +292,8 @@
           <!-- SINOPSIS -->
         <div class="bg-white p-3 w-50 me-4">
           <h4 class="fs-5 text-secondary">SINOPSIS</h4>
-          <p id="description" class="">
-            -<%= book.Description.replace(/\./g, ".\n").substr(0, 500) %>...
+          <p id="" class="">
+            <%= book.Description.replace(/\./g, ".\n").substr(0, 500) %>
           </p>
         </div>
         <!-- SINOPSIS -->
@@ -608,52 +604,8 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- JavaScript para ocultar/mostrar el formulario -->
-    <script>
-      var form = document.getElementById("comment-form");
-      var toggleButton = document.getElementById("toggle-form");
-
-      toggleButton.addEventListener("click", function() {
-        form.classList.toggle("d-none");
-        if (form.classList.contains("d-none")) {
-          toggleButton.textContent = "Mostrar formulario";
-        } else {
-          toggleButton.textContent = "Ocultar formulario";
-        }
-      });
-    </script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function() {
-      var maxCharCount = 150; // Número máximo de caracteres a mostrar antes de "Mostrar más"
-      var description = $('#description').text().trim(); // Obtener el contenido de la etiqueta p y quitar espacios en blanco
-      if (description.length > maxCharCount) {
-        var shortDescription = description.substr(0, maxCharCount) + '...'; // Obtener solo los primeros maxCharCount caracteres y agregar puntos suspensivos
-        var longDescription = description; // Obtener todo el contenido del elemento
-        var isExpanded = false; // Establecer el estado inicial
-        
-        $('#description').text(shortDescription); // Reemplazar el contenido de la etiqueta p con el texto corto
-        
-        // Agregar un enlace "Mostrar más"
-        var showMoreLink = $('<a href="#" style="color: #D9017A;">Mostrar más</a>');
-        showMoreLink.click(function(e) {
-          e.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-          if (isExpanded) {
-            $('#description').text(shortDescription); // Reemplazar el contenido de la etiqueta p con el texto corto
-            showMoreLink.text('Mostrar más'); // Cambiar el texto del enlace a "Mostrar más"
-            isExpanded = false; // Cambiar el estado a no expandido
-          } else {
-            $('#description').text(longDescription); // Reemplazar el contenido de la etiqueta p con el texto completo
-            showMoreLink.text('Mostrar menos'); // Cambiar el texto del enlace a "Mostrar menos"
-            isExpanded = true; // Cambiar el estado a expandido
-          }
-        });
-        
-        $('#description').after(showMoreLink); // Agregar el enlace después del elemento p
-      }
-    });
-    </script>
+    <script src="/scripts/jqueryForBooksInformacion.js"></script>
 
     <script src="scripts/modalSuccess.js"></script>
     <script src="scripts/shoppingModals.js"></script>
