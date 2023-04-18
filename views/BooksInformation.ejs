@@ -217,9 +217,11 @@
               <input type="text" hidden value="<%= book.Price %>" name="bookPriceCar">
               <!-- informaciones necesarias para el carrito -->
               <% if ( book.Stock !== 0 ) { %>
-                <div class="mt-2 w-100 mb-3 d-flex flex-row justify-content-center align-items-center">
-                  <button type="submit" class="btn btn-outline-success w-75" data-mdb-ripple-color="dark">Añadir a la cesta</button>
-                </div>
+                <% if ( session.Role !== 'Admin')  { %>
+                  <div class="mt-2 w-100 mb-3 d-flex flex-row justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-outline-success w-75" data-mdb-ripple-color="dark">Añadir a la cesta</button>
+                  </div>
+                <% } %>
               <% } else { %>
                 <div class="mt-2 mb-3 d-flex flex-row justify-content-center align-items-center">
                   <a href="#" class="btn btn-outline-success text-decoration-line-through" data-mdb-ripple-color="dark">Añadir a la cesta</a>
@@ -242,7 +244,7 @@
                 />
                 <button class="bg-white btn-outline border-0 <%= favoriteChecked === false ? "text-black" : "text-danger" %>">
                   <i class="fa fa-regular fa-heart me-1 <%= favoriteChecked === false ? "text-black" : "text-danger" %>"></i>
-                  GUARDAR
+                  FAVORITO
                 </button>
               </form>
             </div>

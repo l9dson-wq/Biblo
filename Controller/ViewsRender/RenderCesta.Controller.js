@@ -13,16 +13,24 @@ const RenderCesta = async (req, res) => {
   for( let i = 0; i < totalShoppingCar.result.length; i++){
     for( let j = 0; j < totalShoppingCar.books.length; j++){
       if( totalShoppingCar.result[i].bookId === totalShoppingCar.books[j][0].bookID){
-        console.log("Si entra en el for");
+        //console.log("Si entra en el for");
         totalShoppingCar.result[i].Stock = totalShoppingCar.books[j][0].Stock;
       }
+    }
+  }
+
+  //Descuento
+  //SACANDO EL PORCENTAJE
+  for(let i = 0; i < totalShoppingCar.books.length; i++){
+    if( totalShoppingCar.books[i][0].Stock <= 5 && totalShoppingCar.books[i][0].Stock > 0){
+      totalShoppingCar.books[i][0].Discount = parseFloat((85 * parseFloat(books[i][0].Price)) / 100).toFixed(2);
     }
   }
 
   // for( let i = 0; i < totalShoppingCar.books.length; i++){
   //   console.log(totalShoppingCar.books[i][0]);
   // }
-  console.log(totalShoppingCar.result);
+  console.log(totalShoppingCar.books[0][0]);
 
   let totalPrice = 0;
   let totalBooks = 0;
