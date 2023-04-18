@@ -21,11 +21,18 @@ const RenderCesta = async (req, res) => {
 
   //Descuento
   //SACANDO EL PORCENTAJE
-  for(let i = 0; i < totalShoppingCar.books.length; i++){
-    if( totalShoppingCar.books[i][0].Stock <= 5 && totalShoppingCar.books[i][0].Stock > 0){
-      totalShoppingCar.books[i][0].Discount = parseFloat((85 * parseFloat(books[i][0].Price)) / 100).toFixed(2);
-    }
-  }
+  // if (totalShoppingCar.books.length > 0) {
+  //   for (let i = 0; i < totalShoppingCar.books.length; i++) {
+  //     if (totalShoppingCar.books[i][0].Stock <= 5 && totalShoppingCar.books[i][0].Stock > 0) {
+  //       totalShoppingCar.books[i][0].Discount = parseFloat((85 * parseFloat(books[i][0].Price)) / 100).toFixed(2);
+  //     }
+  //   }
+  // } else if (totalShoppingCar.books.length === 1 && totalShoppingCar.books[0].length > 0) {
+  //   if (totalShoppingCar.books[0][0].Stock <= 5 && totalShoppingCar.books[0][0].Stock > 0) {
+  //     totalShoppingCar.books[0][0].Discount = parseFloat((85 * parseFloat(books[0][0].Price)) / 100).toFixed(2);
+  //   }
+  // }
+  
 
   // for( let i = 0; i < totalShoppingCar.books.length; i++){
   //   console.log(totalShoppingCar.books[i][0]);
